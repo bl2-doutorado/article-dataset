@@ -1,0 +1,238 @@
+##########################################################################
+# This file contains Cloud-Native Applications K8S Profile type definitions.
+##########################################################################
+tosca_definitions_version: tosca_2_0
+imports:
+  - cna-core.profile.yaml
+profile: "com.canalbl2.cna.k8s:1.0.0"
+
+metadata:
+  template_name: "Cloud-Native Applications K8S Profile"
+  template_author: "Anonymous"
+  template_version: "1.0"
+description: Cloud-native core profile
+
+# Kubernetes-specific Node Types
+cloud_native.nodes.Kubernetes.Namespace:
+  derived_from: cloud_native.nodes.AbstractWorkspace
+  properties:
+    annotations:
+      type: map
+      entry_schema: { type: string }
+      required: false
+    labels:
+      type: map
+      entry_schema: { type: string }
+      required: false
+
+cloud_native.nodes.Kubernetes.NetworkService:
+  description: >
+    A Kubernetes-specific service implementation. 
+    Maps Abstract requirements to K8s Service manifests.
+  derived_from: cloud_native.nodes.AbstractNetworkService
+  properties:
+    session_affinity:
+      type: string
+      default: None
+      validation:
+        - valid_values: [None, ClientIP]
+
+    external_traffic_policy:
+      type: string
+      default: Cluster
+      validation:
+        - valid_values: [Local, Cluster]
+      description: "Controls if traffic is routed to local-node pods or cluster-wide."
+
+    load_balancer_source_ranges:
+      type: list
+      entry_schema: { type: string }
+      required: false
+      description: "IP CIDRs allowed to access the LoadBalancer."
+
+cloud_native.nodes.kubernetes.CertManagerCertificate:
+  derived_from: cloud_native.nodes.AbstractCertificate
+  properties:
+    issuer_name:
+      type: string
+      default: "letsencrypt-prod"
+    dns_challenge_provider:
+      type: string
+      required: false # Para validação automática via DNS
+
+cloud_native.nodes.kubernetes.NetworkIngress:
+  derived_from: cloud_native.nodes.AbstractNetworkIngress
+  requirements:
+    - certificate:
+        # Aqui acontece a restrição:
+        node: cloud_native.nodes.kubernetes.CertManagerCertificate
+        occurrences: [0, 1]
+
+cloud_native.nodes.Kubernetes.KubernetesApplication:
+  description: A Kubernetes deployable application that implements business features.
+  derived_from: cloud_native.nodes.Service
+  properties:
+    # A mágica acontece aqui: uma lista de containers
+    containers:
+      type: list
+      entry_schema: { type: cloud_native.datatypes.ContainerDefinition }
+      validation: { min_length: 1, max_length: UNBOUNDED }
+  requirements:
+    - placement:
+        node: cloud_native.nodes.Kubernetes.KubernetesClusterNode
+        relationship: tosca.relationships.HostedOn
+    # O armazenamento agora é mapeado via nome do container
+    - storage:
+        capability: tosca.capabilities.Attachment
+        node: cloud_native.nodes.Kubernetes.AbstractKubernetesVolume
+        relationship: cloud_native.relationships.MountsTo
+        occurrences: [0, UNBOUNDED]
+  # Helm strategy
+  artifacts:
+    # O Modelador coloca o Helm Chart aqui
+    chart_source:
+      type: tosca.artifacts.File
+      file: charts/my-app/
+    # O Orquestrador preenche este aqui após o 'helm template'
+    generated_manifest:
+      type: tosca.artifacts.File
+      required: false
+  interfaces:
+    Standard:
+      create:
+        # O script de deploy agora é apenas um executor burro de kubectl
+        implementation: scripts/kubectl_apply.sh
+        inputs:
+          manifest: { get_artifact: [SELF, generated_manifest] }
+
+cloud_native.nodes.Kubernetes.KubernetesDependency:
+  description: A Kubernetes deployable application that implements common functionalities used by the Kubernetes Applications.
+  derived_from: cloud_native.nodes.BackingService
+  capabilities:
+    declare:
+      type: cloud_native.capabilities.Application.ContainerDeclaration
+
+cloud_native.nodes.Kubernetes.KubernetesStorageDependency:
+  description: A Kubernetes deployable application that implements common functionalities used by the Kubernetes Applications.
+  derived_from: cloud_native.nodes.StorageBackingService
+  capabilities:
+    declare:
+      type: cloud_native.capabilities.Application.ContainerDeclaration
+
+cloud_native.nodes.Kubernetes.KubernetesContainer:
+  description: A Kubernetes managed container that is defined in a Kubernetes Application, Kubernetes Dependency or Kubernetes Storage Dependency.
+  derived_from: tosca.nodes.Root
+  properties:
+    image:
+      type: string
+  requirements:
+    - application:
+        description: Application that declares the container.
+        capability: cloud_native.capabilities.Application.ContainerDeclaration
+        relationship: cloud_native.relationships.DeclaredBy
+    - storage:
+      capability: tosca.capabilities.Attachment
+      node: cloud_native.nodes.Kubernetes.AbstractKubernetesVolume
+      relationship: cloud_native.relationships.MountsTo
+      occurrences: [0, UNBOUNDED]
+
+cloud_native.nodes.Kubernetes.KubernetesCluster:
+  description: Kubernetes cluster managed by a specific distribution (K0s, K3s, RKE2, etc).
+  derived_from: cloud_native.nodes.AbstractContainerOrchestratorCluster
+  properties:
+    # Propriedades específicas de K8s para automação de rede
+    pod_cidr:
+      type: string
+      default: "10.42.0.0/16"
+      description: "Network range for pod IPs."
+    service_cidr:
+      type: string
+      default: "10.43.0.0/16"
+      description: "Network range for service IPs."
+    api_endpoint:
+      type: string
+      required: false
+      description: "The internal or external URL of the Kubernetes API Server."
+
+cloud_native.nodes.Kubernetes.KubernetesClusterNode:
+  description: Physical or virtual machines that joined a Kubernetes cluster.
+  derived_from: cloud_native.nodes.AbstractContainerOrchestratorClusterNode
+  properties:
+    instance_type:
+      type: string
+      required: true
+      description: "Tipo de máquina na nuvem (ex: m5.large)"
+    min_size:
+      type: integer
+      default: 1
+    max_size:
+      type: integer
+      default: 10
+    # Labels e Taints são fundamentais para o agendamento de pods
+    #labels:
+    #  type: map
+    #  entry_schema: { type: string }
+    #  required: false
+    #  description: "Kubernetes node labels (e.g., disktype: ssd)."
+    #taints:
+    #  type: list
+    #  entry_schema:
+    #    type: string # Exemplo: "key=value:effect"
+    #  required: false
+    #  description: "Kubernetes node taints to repel pods."
+  requirements:
+    - cluster:
+        node: cloud_native.nodes.Kubernetes.KubernetesCluster
+        relationship: cloud_native.relationships.ManagedBy
+        capability: cloud_native.capabilities.Cluster.Management
+  interfaces:
+    Standard:
+      create:
+        inputs:
+          # Capturando dados do alvo (TARGET) do relacionamento 'cluster'
+          join_token: { get_attribute: [SELF, cluster, bootstrap_token] }
+          master_ip: { get_attribute: [SELF, cluster, api_server_endpoint] }
+          ca_cert: { get_attribute: [SELF, cluster, cluster_ca_cert] }
+        implementation: scripts/k8s_join.sh
+
+cloud_native.nodes.Kubernetes.AbstractKubernetesVolume:
+  description: Any kind of Kubernetes defined volume.
+  derived_from: cloud_native.nodes.AbstractContainerOrchestratorVolume
+
+cloud_native.nodes.Kubernetes.HostPathKubernetesVolume:
+  description: A volume that is mapped in the HostPath.
+  properties:
+    path:
+      description: The directory location on host
+      type: string
+      required: true
+
+    type:
+      description: 'Directory type. Can be one of: ‌ "", DirectoryOrCreate, Directory, FileOrCreate, File, Socket, CharDevice, BlockDevice'
+      type: string
+      required: false
+      default: Directory
+      validation:
+        - valid_values:
+            ["", DirectoryOrCreate, Directory, FileOrCreate, File, Socket, CharDevice, BlockDevice]
+  derived_from: cloud_native.nodes.Kubernetes.AbstractKubernetesVolume
+
+cloud_native.nodes.Kubernetes.SecretKubernetesVolume:
+  description: A volume that is mapped from a secret.
+  derived_from: cloud_native.nodes.Kubernetes.AbstractKubernetesVolume
+
+cloud_native.nodes.Kubernetes.PersistentVolumeClaimKubernetesVolume:
+  description: A volume that is mapped from a persistent volume claim.
+  derived_from: cloud_native.nodes.Kubernetes.AbstractKubernetesVolume
+
+cloud_native.nodes.Kubernetes.LocalKubernetesVolume:
+  description: A volume that is a mounted local storage device such as a disk, partition or directory.
+  derived_from: cloud_native.nodes.Kubernetes.AbstractKubernetesVolume
+
+cloud_native.nodes.Kubernetes.ConfigMapKubernetesVolume:
+  description: A volume that is a mounted from a config map.
+  derived_from: cloud_native.nodes.Kubernetes.AbstractKubernetesVolume
+
+cloud_native.nodes.Kubernetes.EmptyDirKubernetesVolume:
+  description: A volume that is a created when a Kubernetes Pod is assigned to a node, and it is initially empty.
+  derived_from: cloud_native.nodes.Kubernetes.AbstractKubernetesVolume

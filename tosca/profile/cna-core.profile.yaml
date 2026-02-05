@@ -1,0 +1,750 @@
+##########################################################################
+# This file contains Cloud-Native Applications Core Profile type definitions.
+##########################################################################
+tosca_definitions_version: tosca_2_0
+imports:
+  - https://gitlab.com/canalbl2/tosca-templates/-/raw/main/public/templates/simple-profile.yaml
+profile: "com.canalbl2.cna:1.0.0"
+
+metadata:
+  template_name: "Cloud-Native Applications Core Profile"
+  template_author: "Anonymous"
+  template_version: "1.0"
+description: Cloud-native core profile
+
+data_types:
+  cloud_native.datatypes.FinOpsTags:
+    description: Mandatory and optional tags for financial operations (FinOps) and governance.
+    properties:
+      application:
+        type: string
+        required: true
+      environment:
+        type: string
+        required: true
+        validation:
+          - $valid_values: [dev, staging, prod, sandbox]
+      project:
+        type: string
+        required: false
+      owner:
+        type: string
+        required: false
+        description: "Email or ID of the person accountable."
+      team:
+        type: string
+        required: true
+      organizational_unit:
+        type: string
+        required: false
+      cost_center:
+        type: string
+        required: true
+        # Validation example: should start with CC- followed by number
+        # validation:
+        #   - pattern: '^CC-[0-9]+$'
+      managed_via:
+        type: string
+        required: true
+        default: manual
+        validation:
+          - $valid_values: [manual, terraform, helm, tosca, crossplane]
+      compliance:
+        type: list
+        entry_schema:
+          type: string
+        required: false
+        description: "List of compliance standards (e.g., [HIPAA, GDPR])."
+
+  cloud_native.datatypes.InfraFinOpsTags:
+    derived_from: cloud_native.datatypes.FinOpsTags
+    description: Extension of FinOps tags used in infrastructure components
+    properties:
+      provider:
+        type: string
+        validation: { $valid_values: [aws, gcp, oci, azure, on-premise] }
+      purchasing_model:
+        type: string
+        default: on_demand
+        validation: { $valid_values: [on_demand, spot, reserved] }
+      region: { type: string, required: true }
+
+  cloud_native.datatypes.PortMapping:
+    properties:
+      name:
+        type: string
+        required: false # ex: "http", "metrics"
+      port:
+        type: integer
+        description: The port exposed by the service (the entry point).
+        required: true
+      target_port:
+        type: integer
+        description: The port the component is actually listening on.
+        required: false # If null, than equals to 'port''
+
+  cloud_native.datatypes.ContainerDefinition:
+    derived_from: tosca.datatypes.Root
+    description: Common container data
+    properties:
+      name: { type: string, required: true }
+      image: { type: string, required: true }
+      resources:
+        type: map
+        entry_schema: { type: string } # ex: cpu: 500m, memory: 512Mi
+        required: true
+      ports:
+        description: List of ports exposed by the application running inside the container
+        type: list
+        entry_schema: { type: cloud_native.datatypes.PortMapping }
+      env_vars:
+        type: map
+        entry_schema: { type: string }
+
+  cloud_native.datatypes.AbstractComponentScalability:
+    description: Defines horizontal scaling boundaries for a component.
+    properties:
+      min_instances:
+        type: integer
+        required: true
+        default: 1
+        validation:
+          - $greater_or_equal: 0
+
+      max_instances:
+        type: integer
+        required: true
+        default: 1
+        validation:
+          $greater_or_equal:
+            - $value
+            - $get_property: [SELF, scalability, min_instances]
+
+      default_instances:
+        type: integer
+        required: false
+        validation:
+          $and:
+            - $greater_or_equal:
+                - $value
+                - $get_property: [SELF, scalability, min_instances]
+            - $less_or_equal:
+                - $value
+                - $get_property: [SELF, scalability, max_instances]
+      target_cpu_utilization:
+        type: integer
+        required: false
+        description: "Target cpu metric to trigger scaling."
+        validation:
+          - $in_range: [1, 100]
+      target_mem_utilization:
+        type: integer
+        required: false
+        description: "Target cpu metric to trigger scaling."
+        validation:
+          - $in_range: [1, 100]
+
+  cloud_native.datatypes.AbstractComponentUpdateStrategy:
+    description: Strategy for updating components without downtime.
+    properties:
+      type:
+        type: string
+        description: Name of the strategy.
+        required: true
+        validation:
+          - $valid_values: [rolling_update, recreate, blue_green, canary]
+        default: rolling_update
+
+      max_surge:
+        type: string # Can be "1" or "25%"
+        description: Maximum number or percentage of instances that can be created above the desired cost.
+        required: false
+        default: "25%"
+
+      max_unavailable:
+        type: string
+        description: Maximum number or percentage of instances that can be unavailable during the update.
+        required: false
+        default: "25%"
+
+  cloud_native.datatypes.SecretReference:
+    derived_from: string
+    description: "Reference to a external secret (eg: vault://...)"
+
+  cloud_native.datatypes.EndpointDetails:
+    description:
+    properties:
+      host: { type: string }
+      port: { type: integer }
+      protocol: { type: string, default: "tcp" }
+      role: { type: string, validation: { $valid_values: [primary, replica, internal, public] } } #TODO: Should be a datatype too?
+
+  cloud_native.datatypes.ConfigResource:
+    properties:
+      file_path: { type: string, description: "Path in container used to mount the file." }
+      content: { type: string, description: "Raw file content." }
+      read_only: { type: boolean, default: true }
+
+  cloud_native.datatypes.LoadBalancerConfig:
+    properties:
+      static_ip:
+        type: string
+        required: false
+      internal_only:
+        type: boolean
+        default: false
+        description: "If true, the cloud provider will create a private Load Balancer."
+      annotations:
+        type: map
+        entry_schema: { type: string }
+        required: false
+        description: "Provider-specific settings (e.g. service.beta.kubernetes.io/aws-load-balancer-type)."
+
+  cloud_native.datatypes.HttpPathRule:
+    description: Maps a path with a resource #TODO: Review
+    properties:
+      path:
+        type: string
+        description: "Ex: /v1/users"
+        default: "/"
+      path_type:
+        type: string
+        validation:
+          - $valid_values: [Prefix, Exact, ImplementationSpecific]
+        default: Prefix
+
+  cloud_native.datatypes.IngressRule:
+    description: Associates a specific host with a list of HttpPathRules.
+    properties:
+      host:
+        type: string
+        description: "Ex: api.myproject.com"
+        required: true
+      paths:
+        type: list
+        entry_schema:
+          type: cloud_native.datatypes.HttpPathRule
+        required: true
+
+capability_types:
+  cloud_native.capabilities.Cluster.Management:
+    derived_from: tosca.capabilities.Root
+    description: "Management capacity that enables new nodes to be added to the cluster."
+    attributes:
+      # Data generated in execution time by the orchestrator/cloud provider
+      bootstrap_token:
+        type: string
+        description: "Authentication token (Join Token)."
+      cluster_ca_cert:
+        type: string
+        description: "Cluster CA certificate to validate identity."
+      api_server_endpoint:
+        type: string
+        description: "DNS/IP address of API Server."
+
+  cloud_native.capabilities.Cluster.StorageDefinition:
+    derived_from: tosca.capabilities.Root
+    description: Indicates that the node can act as a management plane for storage resources.
+
+  cloud_native.capabilities.StatefulIdentity:
+    derived_from: tosca.capabilities.Root
+
+  cloud_native.capabilities.Workspace:
+    derived_from: tosca.capabilities.Root
+    description: "Defines a logical scope for resource segregation (Namespace/Project)."
+
+node_types:
+  cloud_native.nodes.AbstractComponent:
+    description: An abstract element of the cloud-native application.
+    derived_from: tosca.nodes.SoftwareComponent
+    properties:
+      scalability:
+        type: cloud_native.datatypes.AbstractComponentScalability
+        required: false
+      finops:
+        type: cloud_native.datatypes.FinOpsTags
+        required: true
+      update_strategy:
+        type: cloud_native.datatypes.AbstractComponentUpdateStrategy
+        required: false
+      workload_type:
+        type: string
+        default: stateless
+        validation:
+          - $valid_values: [stateless, stateful]
+        description: >
+          'stateless' maps to a Deployment (anonymous pods). 
+          'stateful' maps to a StatefulSet (ordered, stable identity).
+      containers:
+        type: list
+        entry_schema: { type: cloud_native.datatypes.ContainerDefinition }
+        $validation: { $min_length: 1 }
+      env_vars:
+        type: map
+        entry_schema: { type: string }
+        description: "Environment variables (will be converted in secrets)."
+
+      config_files:
+        type: map
+        entry_schema:
+          type: cloud_native.datatypes.ConfigResource
+        description: "Mpas filename to its content and destiny."
+
+      # Cloud specific
+      additional_metadata:
+        type: map
+        entry_schema: { type: string }
+        required: false
+        description: "Inject as annotations on K8s or meta in Nomad"
+      scheduling_requirements:
+        type: list
+        entry_schema: { type: string } # Eg: ["dedicated:db", "gpu:true"]
+      # Propriedade movida para o componente
+      scheduling_mode:
+        type: string
+        default: flexible
+        constraints:
+          - valid_values: [strict, flexible]
+
+    requirements:
+      - workspace:
+          description: Infrastructure needed to deploy the component
+          capability: cloud_native.capabilities.Workspace
+          count_range: [1, 1]
+          relationship: cloud_native.relationships.AssignedTo
+          node: cloud_native.nodes.AbstractWorkspace
+      - endpoint_link:
+          description: Allows the definition of links between Components
+          capability: tosca.capabilities.Endpoint
+          relationship: tosca.relationships.ConnectsTo
+          node: cloud_native.nodes.AbstractComponent
+          count_range: [0, UNBOUNDED]
+      - storage:
+          description: Storage used by the component to persist data
+          capability: tosca.capabilities.Storage
+          relationship: cloud_native.relationships.PersistsOn
+          count_range: [0, UNBOUNDED]
+    capabilities:
+      service_endpoint:
+        description: A layer 4 endpoint provided by the component.
+        type: tosca.capabilities.Endpoint
+        count_range: [0, UNBOUNDED]
+      stable_identity:
+        type: cloud_native.capabilities.StatefulIdentity
+        count_range: [0, 1]
+      declare:
+        type: cloud_native.capabilities.Application.ContainerDeclaration
+
+  cloud_native.nodes.Service:
+    description: A cloud-native service.
+    derived_from: cloud_native.nodes.AbstractComponent
+    requirements:
+      - placement:
+          capability: tosca.capabilities.Node
+          node: cloud_native.nodes.AbstractContainerOrchestratorClusterNode
+          relationship: tosca.relationships.HostedOn
+          occurrences: [0, 1]
+  cloud_native.nodes.BackingService:
+    description: A cloud-native backing service like a log aggregator or a business process engine.
+    derived_from: cloud_native.nodes.AbstractComponent
+    requirements:
+      - placement:
+          capability: tosca.capabilities.Node
+          node: cloud_native.nodes.AbstractContainerOrchestratorClusterNode
+          relationship: tosca.relationships.HostedOn
+          occurrences: [0, 1]
+  cloud_native.nodes.StorageBackingService:
+    description: A cloud-native storage backing service like a SQL database, eg. PostgresSQL, a NoSQL database, eg. Cassandra, or any other type of storage backing service.
+    derived_from: cloud_native.nodes.AbstractComponent
+    attributes:
+      endpoints:
+        type: map
+        entry_schema:
+          type: cloud_native.datatypes.EndpointDetails
+    requirements:
+      - placement:
+          capability: tosca.capabilities.Node
+          node: cloud_native.nodes.AbstractContainerOrchestratorClusterNode
+          relationship: tosca.relationships.HostedOn
+          occurrences: [0, 1]
+
+  cloud_native.nodes.GenericComponent:
+    description: Represents a component that can not be mapped to any other service kind.
+    derived_from: cloud_native.nodes.AbstractComponent
+
+  cloud_native.nodes.AbstractInfrastructure:
+    description: An abstract element of the infrastructure.
+    derived_from: tosca.nodes.Compute
+    capabilities:
+      host:
+        type: tosca.capabilities.Compute
+        valid_source_types: [cloud_native.nodes.AbstractComponent]
+    properties:
+      # 1. HARDWARE (O "Instance Type" generalizado)
+      instance_type:
+        type: string
+        required: true
+        description: "Tamanho/Família da máquina (ex: t3.medium, n1-standard-1)."
+
+      # 2. MODELO DE PROVISIONAMENTO (Agnóstico)
+      provisioning_model:
+        type: string
+        default: standard
+        description: "Modelo de compra da capacidade."
+        validation:
+          - $valid_values: [standard, spot, reserved]
+
+      # 3. CATEGORIA DE IMAGEM (O "AMI Type" generalizado)
+      image_category:
+        type: string
+        default: linux_optimized
+        description: "Categoria do SO para que o driver escolha a imagem correta."
+        validation:
+          - $valid_values: [linux_optimized, hardened_container_os, windows, arm_optimized]
+
+  cloud_native.nodes.AbstractContainerOrchestratorCluster:
+    description: A cluster managed by a Container Orchestrator like Kubernetes or Nomad.
+    derived_from: cloud_native.nodes.AbstractInfrastructure
+    properties:
+      distribution:
+        type: string
+        required: true
+      distribution_version:
+        type: version
+        required: true
+      finops:
+        type: cloud_native.datatypes.InfraFinOpsTags
+        required: true
+
+    capabilities:
+      host:
+        valid_source_types: [cloud_native.nodes.AbstractComponent]
+      manage_nodes:
+        type: cloud_native.capabilities.Cluster.Management
+      define_Storages:
+        type: cloud_native.capabilities.Cluster.StorageDefinition
+
+  cloud_native.nodes. AbstractContainerOrchestratorClusterNode:
+    derived_from: cloud_native.nodes.AbstractInfrastructure
+    description: A cluster node managed by a Container Orchestrator like Kubernetes or Nomad.
+    properties:
+      node_role:
+        type: string
+        default: worker
+        validation:
+          - $valid_values: [worker, ingress, storage, master]
+
+      instance_type: { type: string, required: false }
+    requirements:
+      - cluster:
+          description: Cluster that the node is joined
+          capability: cloud_native.capabilities.Cluster.Management
+          relationship: cloud_native.relationships.ManagedBy
+          node: cloud_native.nodes.AbstractContainerOrchestratorCluster
+    interfaces:
+      Standard:
+        create:
+          description: "Phase where the node joins the cluster."
+    cloud_native.nodes.AbstractNetworkService:
+      description: >
+        An abstract node that defines how a component is exposed to the network.
+        It maps incoming traffic to the component's internal ports.
+      derived_from: tosca.nodes.Root
+      properties:
+        port_mappings:
+          type: list
+          description: List of port mappings (Service port -> Target port).
+          entry_schema:
+            type: cloud_native.datatypes.PortMapping
+          required: true
+
+        exposure_type:
+          type: string
+          description: Defines the scope of the service.
+          required: true
+          default: internal
+          validation:
+            - $valid_values: [internal, node, external, headless]
+
+        protocol:
+          type: string
+          default: TCP
+          validation:
+            - $valid_values: [TCP, UDP, SCTP, HTTP, GRPC]
+        load_balancer_config:
+          type: cloud_native.datatypes.LoadBalancerConfig
+          required: false
+
+      requirements:
+        - backend:
+            description: The component that this service exposes.
+            capability: tosca.capabilities.Endpoint
+            node: cloud_native.nodes.AbstractComponent
+            relationship: tosca.relationships.ConnectsTo
+            occurrences: [1, 1]
+
+  cloud_native.nodes.AbstractNetworkIngress:
+    description: >
+      Defines external access rules to services based on HTTP hosts and paths.
+    derived_from: tosca.nodes.Root
+    properties:
+      rules:
+        type: list
+        entry_schema:
+          type: cloud_native.datatypes.IngressRule
+        required: true
+      tls_enabled:
+        type: boolean
+        default: false
+    requirements:
+      # The ingress "uses" one or more  NetworkServices
+      - backends:
+          capability: tosca.capabilities.Endpoint
+          node: cloud_native.nodes.AbstractNetworkService
+          relationship: tosca.relationships.RoutesTo
+          occurrences: [1, UNBOUNDED]
+      - certificate:
+          capability: tosca.capabilities.Root
+          node: cloud_native.nodes.AbstractCertificate
+          relationship: tosca.relationships.DependsOn
+          occurrences: [0, 1]
+
+  cloud_native.nodes.AbstractWorkspace:
+    description: A logical isolation unit within a cluster (Namespace, Project, etc).
+    derived_from: tosca.nodes.Root
+    properties:
+      workspace_name:
+        type: string
+        required: true
+      resource_quota:
+        type: map # Eg: { cpu: "4", memory: "8Gi" }
+        required: false
+    requirements:
+      - cluster:
+          capability: tosca.capabilities.Compute
+          node: cloud_native.nodes.AbstractContainerOrchestratorCluster
+          relationship: tosca.relationships.HostedOn
+    capabilities:
+      workspace_scope:
+        type: cloud_native.capabilities.Workspace
+        valid_source_types: [cloud_native.nodes.AbstractComponent]
+
+  cloud_native.nodes.AbstractCertificate:
+    derived_from: tosca.nodes.Root
+    properties:
+      common_name:
+        type: string
+        required: true
+        description: "O domínio principal (ex: api.empresa.com)"
+      alt_names:
+        type: list
+        entry_schema: { type: string }
+        required: false
+        description: "SANs (Subject Alternative Names)"
+
+  # Used for pure Serverless
+  cloud_native.nodes.CloudProjectWorkspace:
+    derived_from: cloud_native.nodes.AbstractWorkspace
+    properties:
+      region:
+        type: string
+        required: true
+      cloud_provider:
+        type: string
+        validation: { $valid_values: [aws, gcp, oci, azure, on-premise] }
+    capabilities:
+      workspace_scope:
+        type: cloud_native.capabilities.Workspace
+        valid_source_types: [cloud_native.nodes.AbstractComponent]
+
+  cloud_native.nodes.AbstractStorage:
+    description: Stores data.
+    derived_from: tosca.nodes.Abstract.Storage
+    capabilities:
+      storage:
+        type: tosca.capabilities.Storage
+        valid_source_types: [cloud_native.nodes.AbstractComponent]
+
+  cloud_native.nodes.AbstractContainerOrchestratorVolume:
+    description: Stores data of components running in a container orchestrator cluster.
+    derived_from: cloud_native.nodes.BlockStorage
+    requirements:
+      - cluster:
+          capability: cloud_native.capabilities.Cluster.StorageDefinition
+          relationship: cloud_native.relationships.DefinedOn
+          node: cloud_native.nodes.AbstractContainerOrchestratorCluster
+          occurrences: [1, 1]
+
+  # Disk and Volumes Subtype
+  cloud_native.nodes.BlockStorage:
+    derived_from: cloud_native.nodes.AbstractStorage
+    properties:
+      size:
+        type: Size
+        required: true
+    capabilities:
+      attachment:
+        type: tosca.capabilities.Attachment # Enables 'AttachesTo' use
+        valid_source_types: [cloud_native.nodes.AbstractInfrastructure]
+
+  # S3/Blob Subtypes
+  cloud_native.nodes.ObjectStorage:
+    derived_from: cloud_native.nodes.AbstractStorage
+    capabilities:
+      endpoint:
+        type: tosca.capabilities.Endpoint # Has an URL access
+        valid_source_types: [cloud_native.nodes.AbstractComponent]
+
+relationship_types:
+  cloud_native.relationships.AssignedTo:
+    derived_from: tosca.relationships.Root
+    description: "Logically associates an application component with an workspace."
+    valid_target_types: [cloud_native.capabilities.Workspace]
+
+  cloud_native.relationships.PersistsOn:
+    derived_from: tosca.relationships.DependsOn
+    description: Relationship used by a component to store persistent data on a storage resource.
+    valid_target_types: [tosca.capabilities.Storage]
+    properties:
+      mount_path:
+        type: string
+        required: false
+        description: "Absolute path inside software component where the storage will be mounted on (eg: /var/lib/mysql)."
+      access_mode:
+        type: string
+        default: ReadWriteOnce
+        validation:
+          - $valid_values: [ReadWriteOnce, ReadOnlyMany, ReadWriteMany]
+        description: Defines how the component access the volume.
+
+  cloud_native.relationships.ManagedBy:
+    derived_from: tosca.relationships.ConnectsTo
+    description: "Stablishes a connection between a node and the cluster, by transfering cluster credentials to the node."
+    valid_target_types: [cloud_native.capabilities.Cluster.Management]
+    interfaces:
+      Configure:
+        pre_configure_source:
+          description: TOSCA Orchestrator executes a script to get the join token of the cluster (target) and prepares the node (source) before it connects.
+          implementation: scripts/setup_join_credentials.sh
+
+  cloud_native.relationships.DefinedOn:
+    description: Describes a logical association where a resource definition is managed by a specific cluster control plane.
+    derived_from: tosca.relationships.DependsOn # Ensures that the cluster is created before the volume
+    valid_target_types: [cloud_native.capabilities.Cluster.StorageDefinition]
+    properties:
+      namespace:
+        type: string
+        required: false
+        description: The logical isolation unit (namespace, project, tenant) within the cluster.
+        default: default
+      context_name:
+        type: string
+        required: false
+        description: Optional label for the orchestration context (e.g., storage-class name).
+
+  cloud_native.relationships.MountsTo:
+    derived_from: tosca.relationships.ConnectsTo
+    properties:
+      mount_path:
+        type: string
+        required: true
+        description: "O caminho dentro do container (ex: /var/lib/mysql)"
+      read_only:
+        type: boolean
+        default: false
+
+  cloud_native.relationships.ConnectsTo:
+    derived_from: tosca.relationships.ConnectsTo
+    properties:
+      credential_mapping:
+        type: map
+        entry_schema: { type: string }
+        description: "Maps attributes from target to env vars of source. Eg: { 'DB_URL': 'host' }"
+        required: false
+      dns_scope:
+        type: string
+        default: cluster
+        validation:
+          - $valid_values: [local, cluster]
+
+policy_types:
+  cloud_native.policies.LocalityEnforcement:
+    derived_from: tosca.policies.Root
+    description: "Ensures that connected components are deployed on the same cloud provider and region."
+    properties:
+      enforcement_level:
+        type: string
+        default: "strict" # strict (blocks) ou advisory (only notifies)
+      scope:
+        type: list
+        entry_schema: { type: string }
+        default: ["provider", "region"]
+  cloud_native.policies.CloudDistribution:
+    derived_from: tosca.policies.Root
+    description: "Define a estratégia de sobrevivência entre diferentes provedores."
+    properties:
+      strategy:
+        type: string
+        constraints: [{ $valid_values: [mirror, distributed] }]
+        description: "Mirror: Identical replication of instances across providers. Distributed: Asymmetrical allocation, allowing a variable number of instances per provider."
+      min_providers:
+        type: integer
+        default: 2
+      allowed_providers:
+        type: list
+        entry_schema: { type: string }
+
+  cloud_native.policies.Sustainability:
+    derived_from: tosca.policies.Root
+    description: "Limits the deployment based on the environmental impact of the current template."
+    targets: [cloud_native.nodes.AbstractInfrastructure]
+    properties:
+      max_total_carbon_footprint:
+        type: float
+        required: true
+        description: "gCO2eq/kWh monthly limit (Carbon intensity of local electricity network) to all the topology."
+      # energy_source_preference:
+      #   type: list
+      #   entry_schema: { type: string }
+      #   default: [solar, wind, hydro]
+  cloud_native.policies.Recovery:
+    derived_from: tosca.policies.Root
+    description: Defines the orchestrator behavior when there are errors in the lifecycle.
+    properties:
+      action_on_failure:
+        type: string
+        default: rollback
+        validation:
+          - $valid_values: [rollback, stay, retry]
+      max_retries:
+        type: integer
+        default: 3
+        description: "Retries number on 'start' phase before giving up."
+      cleanup_on_error:
+        type: boolean
+        default: true
+        description: "If true, removes orphan resources (such as volumes) if the component fails."
+        # SAFETY SWITCH
+        preserve_stateful_resources:
+          type: boolean
+          description: "If true, denies the exclusion of Storage or Stateful nodes during the rollback."
+          default: true
+
+        stateful_node_types:
+          type: list
+          entry_schema: { type: string }
+          default:
+            - cloud_native.nodes.StorageBackingService
+          description: "Type list that should never be automatically removed."
+  cloud_native.policies.SchedulingStrategy:
+    derived_from: tosca.policies.Root
+    description: "Define como o orquestrador deve aplicar o mapeamento físico do MILP"
+    properties:
+      mode:
+        type: string
+        required: true
+        constraints:
+          - valid_values: [strict, flexible]
+      target_scope:
+        type: string
+        default: "all" # Pode ser aplicado a toda a topologia ou a grupos específicos

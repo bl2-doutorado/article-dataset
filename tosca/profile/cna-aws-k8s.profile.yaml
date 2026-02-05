@@ -1,0 +1,53 @@
+tosca_definitions_version: tosca_2_0
+
+imports:
+  - cna-k8s.profile.yaml
+
+node_types:
+  cloud_native.nodes.aws.EKSCluster:
+    derived_from: cloud_native.nodes.Kubernetes.KubernetesCluster
+    description: "AWS Managed Kubernetes (EKS)"
+    properties:
+      role_arn:
+        type: string
+        description: "IAM Role para o control plane do EKS."
+      public_access:
+        type: boolean
+        default: false
+      encryption_key:
+        type: string
+        required: false
+      # Sobrescrevendo o provider no FinOps automaticamente
+      finops:
+        type: cloud_native.datatypes.InfraFinOpsTags
+        default: { provider: aws } # Fixa o provider como AWS
+
+    attributes:
+      # O orquestrador preenche estes valores após o Terraform/CloudFormation terminar
+      cluster_security_group_id: { type: string }
+      vpc_id: { type: string }
+    capabilities:
+      manage_nodes:
+        type: cloud_native.capabilities.Cluster.Management
+        attributes:
+          # Mapeamento explícito
+          api_server_endpoint: { get_attribute: [SELF, endpoint_url] }
+
+  cloud_native.nodes.aws.EKSWorkerNode:
+    derived_from: cloud_native.nodes.Kubernetes.KubernetesClusterNode
+    properties:
+      ami_type:
+        type: string
+        description: "Especialização do image_category para o catálogo EKS (ex: AL2_x86_64)."
+        required: false
+      role_arn:
+        type: string
+        description: "IAM Role necessária para o worker se comunicar com o control plane."
+
+  cloud_native.nodes.aws.ACMCertificate:
+    derived_from: cloud_native.nodes.AbstractCertificate
+    properties:
+      validation_method:
+        type: string
+        validation: [{ $valid_values: [DNS, EMAIL] }]
+        default: DNS
