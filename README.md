@@ -55,12 +55,18 @@ Busque deixar o mais claro possível, apresentando informações como versões d
 
 ### Software Requirements
 
+* curl
 * Git
 * Docker
 * Java 21+
-* Python 3.8+
 
 ## Installation Scripts
+
+#### curl
+```shell
+sudo apt-get update
+sudo apt-get install curl
+```
 
 #### Git (https://git-scm.com/downloads)
 ```shell
@@ -104,10 +110,9 @@ There are no significant security concerns. The program's operations are restric
 
 To configure the environment, ensure all [Dependencies](#dependencies) are installed and operational, particularly the Docker engine.
 
-The `docker-compose.yml` file defines the environment required to run the application (MILP). To simplify execution, we provide a `run.sh` script that automates the deployment and testing process.
+There are two possible ways to execute the MILP solver. Using Java or Docker Compose.
 
-Alternatively, services can be executed manually by following the instructions in each respective directory. 
-
+The `docker-compose.yml` file defines the environment required to run the application (MILP). To simplify execution of the client that communitactes with the solver, we provide a `run.sh` script that automates the testing process.
 
 ## Exection via `run.sh`
 
@@ -123,11 +128,12 @@ Clone this repository:
 cd $HOME/git
 ```
 
-Clone this repository onto the machine where the services will be running:
+Download this repository onto the machine where the service will be running:
 
 ```
-git clone https://github.com/xxx/xxx-sbrc26.git
-cd xxx-sbrc26 # Replace with actual folder name
+curl -o article-dataset.zip https://anonymous.4open.science/api/repo/article-dataset-E02E/zip                                                                                                                                     
+unzip article-dataset.zip
+cd article-dataset
 ```
 
  
@@ -138,14 +144,37 @@ cd xxx-sbrc26 # Replace with actual folder name
 <!-- Esta seção deve apresentar um passo a passo para a execução de um teste mínimo.
 Um teste mínimo de execução permite que os revisores consigam observar algumas funcionalidades do artefato. 
 Este teste é útil para a identificação de problemas durante o processo de instalação. -->
+
+
+
+
+
 This section provides a step-by-step guide to executing a minimal test case, allowing reviewers to verify the core functionalities of the artifact and identify potential installation issues.
 
+
+
+
 ## 1. Start the MILP Solver:
-Once dependencies are configured, execute the following script in a terminal to start the MILP service on port 8183. Ensure no other processes are using this port.
+Once dependencies are configured, the MILP Solver can be executed in two different ways:
+
+### The Java way (Recommended)
+
+To execute the solver using Java, run the following script in a terminal to start the service on port `8183`. Ensure no other processes are currently using this port.
 
 ```
 ./execute_milp.sh
 ```
+
+### Using Docker Compose
+
+Docker Compose can also deploy the MILP Solver as a service on port 8183. However, in our benchmarks (specifically using Docker Desktop), this method resulted in slower solver performance. Therefore, we **strongly recommend using the Java execution method for better efficiency**.
+
+To start the solver using Docker Compose, run:
+
+```
+docker compose up
+```
+
 
 ## 2. Run the Demonstration:
 Open a new terminal and execute the demonstration script to run all experiments discussed in the paper:
