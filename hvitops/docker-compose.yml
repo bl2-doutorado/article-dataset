@@ -1,0 +1,229 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database for Appointments Service
+  postgres:
+    image: postgres:15-alpine
+    container_name: hvitops-postgres
+    environment:
+      POSTGRES_USER: hvitops_user
+      POSTGRES_PASSWORD: hvitops_password
+      POSTGRES_DB: hvitops_appointments
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker-config/postgres/init.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ./docker-config/postgres/init-auth.sql:/docker-entrypoint-initdb.d/02-init-auth.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - hvitops-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hvitops_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MongoDB for Laboratory Tests and Medical Records
+  mongo:
+    image: mongo:7.0
+    container_name: hvitops-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: hvitops_user
+      MONGO_INITDB_ROOT_PASSWORD: hvitops_password
+    volumes:
+      - mongo_data:/data/db
+      - ./docker-config/mongodb/init.js:/docker-entrypoint-initdb.d/init.js
+    ports:
+      - "27017:27017"
+    networks:
+      - hvitops-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for Notifications Queue
+  redis:
+    image: redis:7-alpine
+    container_name: hvitops-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - hvitops-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Auth Service (Spring Boot)
+  auth:
+    build:
+      context: ./hvitops-auth
+      dockerfile: Dockerfile
+    container_name: hvitops-auth
+    ports:
+      - "8085:8085"
+    environment:
+      JAVA_OPTS: "-Xmx512m -Xms256m"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/hvitops_auth"
+      SPRING_DATASOURCE_USERNAME: "hvitops_user"
+      SPRING_DATASOURCE_PASSWORD: "hvitops_password"
+      JWT_SECRET: "hvitops-secret-key-for-jwt-token-validation-2024"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - hvitops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8085/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # API Gateway (Spring Cloud Gateway)
+  gateway:
+    build:
+      context: ./hvitops-gateway
+      dockerfile: Dockerfile
+    container_name: hvitops-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      JAVA_OPTS: "-Xmx512m -Xms256m"
+      JWT_SECRET: "hvitops-secret-key-for-jwt-token-validation-2024"
+    depends_on:
+      - auth
+      - appointments
+      - laboratory-tests
+      - records
+    networks:
+      - hvitops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Appointments Service (Spring Boot)
+  appointments:
+    build:
+      context: ./hvitops-appointments
+      dockerfile: Dockerfile
+    container_name: hvitops-appointments
+    ports:
+      - "8081:8081"
+    environment:
+      JAVA_OPTS: "-Xmx512m -Xms256m"
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/hvitops_appointments"
+      SPRING_DATASOURCE_USERNAME: "hvitops_user"
+      SPRING_DATASOURCE_PASSWORD: "hvitops_password"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - hvitops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Laboratory Tests Service (Quarkus)
+  laboratory-tests:
+    build:
+      context: ./hvitops-laboratory-tests
+      dockerfile: Dockerfile
+    container_name: hvitops-laboratory-tests
+    ports:
+      - "8082:8082"
+    environment:
+      QUARKUS_MONGODB_CONNECTION_STRING: "mongodb://hvitops_user:hvitops_password@mongo:27017"
+      QUARKUS_MONGODB_DATABASE: "hvitops_laboratory"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - hvitops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Medical Records Service (Micronaut)
+  records:
+    build:
+      context: ./hvitops-records
+      dockerfile: Dockerfile
+    container_name: hvitops-records
+    ports:
+      - "8083:8083"
+    environment:
+      MICRONAUT_MONGODB_URI: "mongodb://hvitops_user:hvitops_password@mongo:27017"
+      MICRONAUT_MONGODB_DATABASE: "hvitops_records"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - hvitops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Notifications Service (Node.js + Express)
+  notifications:
+    build:
+      context: ./hvitops-notifications
+      dockerfile: Dockerfile
+    container_name: hvitops-notifications
+    ports:
+      - "8084:8084"
+    environment:
+      PORT: 8084
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - hvitops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8084/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Frontend (React + Vite)
+  web:
+    build:
+      context: ./hvitops-web
+      dockerfile: Dockerfile
+    container_name: hvitops-web
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_API_URL: "http://gateway:8080"
+    depends_on:
+      - gateway
+    networks:
+      - hvitops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  hvitops-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  mongo_data:
+  redis_data:

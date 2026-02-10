@@ -1,0 +1,17 @@
+micronaut:
+  application:
+    name: hvitops-records
+  server:
+    port: 8083
+    cors:
+      enabled: false
+  data:
+    mongodb:
+      database: hvitops_records
+
+logging:
+  level:
+    root: INFO
+    com.hvitops: DEBUG
+mongodb:
+  uri: "mongodb://hvitops_user:hvitops_password@mongo:27017/hvitops_records?authSource=admin"

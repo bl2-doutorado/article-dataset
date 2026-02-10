@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: hvitops-auth
+  
+  datasource:
+    url: jdbc:postgresql://postgres:5432/hvitops_auth
+    username: hvitops_user
+    password: hvitops_password
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: false
+  
+  security:
+    user:
+      name: admin
+      password: admin
+
+server:
+  port: 8085
+  servlet:
+    context-path: /
+
+jwt:
+  secret: hvitops-secret-key-for-jwt-token-validation-2024
+  expiration: 86400000
+
+logging:
+  level:
+    root: INFO
+    com.hvitops: DEBUG
