@@ -34,7 +34,7 @@ This section details the environment required to execute and replicate the exper
 
 * clouds_data/ - Stores [cloud prices and carbon footprint data](clouds_data/cloud_machine_types_cost_and_monthly_carbon_footprint.csv)
 * experiments/ - Contains [the YAML files](experiments/yamls/) used to conduct  the experiments
-  * [article-results/](article-results): Contains the results presented in the paper, categorized by scenario (A, B, C).
+  * [article-results/README.md](article-results): Contains the results presented in the paper, categorized by scenario (A, B, C).
   * [yamls/](yamls): Holds all TOSCA templates used as input for the MILP solver.
   * [results/](results): Directory where all results generated during test execution will be stored.
 * tosca/ - Contains TOSCA-related files and specifications.

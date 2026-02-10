@@ -2,15 +2,13 @@ tosca_definitions_version: tosca_2_0
 
 metadata:
   template_name: Healthcare_Integrated_Stack
-  description: "Topologia completa com instâncias e dependências usando anchors e blocos de containers"
+  description: "HVitOps Topology"
 
 imports:
   - profiles/cna-k8s.profile.yaml
 
 service_template:
   node_templates:
-    # --- Camada de Dados (STRICT) ---
-
     postgresql:
       type: cloud_native.nodes.StorageBackingService
       properties:
@@ -56,8 +54,6 @@ service_template:
           min_instances: 1
           max_instances: 1
           default_instances: 2
-
-    # --- Camada de Serviços (FLEXIBLE) ---
 
     frontend:
       type: cloud_native.nodes.Service
@@ -154,8 +150,6 @@ service_template:
           default_instances: 2
       requirements:
         - cache: redis
-
-    # --- API Gateway (FLEXIBLE + Configs Adicionais) ---
 
     api_gateway:
       type: cloud_native.nodes.Service
