@@ -354,7 +354,6 @@ public class App implements Callable<Integer> {
       String label, Object finalValue, String cliOption, Object absoluteDefault) {
     String source;
 
-    // Verifica a origem para o log
     if (this.spec.commandLine().getParseResult().hasMatchedOption(cliOption)) {
       source = "CLI (" + cliOption + ")";
     } else if (finalValue != null && !finalValue.equals(absoluteDefault)) {
