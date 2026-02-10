@@ -1,0 +1,67 @@
+tosca_definitions_version: tosca_2_0
+
+metadata:
+  template_name: "Cloud-Native Applications OCI Profile"
+  template_author: "Anonymous"
+  template_version: "1.0"
+
+imports:
+  - cna-k8s.profile.yaml
+
+node_types:
+  cloud_native.nodes.oci.OKECluster:
+    derived_from: cloud_native.nodes.Kubernetes.KubernetesCluster
+    description: "Oracle Container Engine for Kubernetes (OKE)"
+    properties:
+      compartment_id:
+        type: string
+        description: "The OCID of the compartment where the cluster will be created."
+        required: true
+      vcn_id:
+        type: string
+        description: "The OCID of the target Virtual Cloud Network (VCN)."
+      kubernetes_version:
+        type: string
+        default: "v1.29.1"
+      cluster_type:
+        type: string
+        default: "enhanced"
+        validation:
+          - $valid_values: [basic, enhanced]
+
+      # FinOps specialization for OCI
+      finops:
+        type: cloud_native.datatypes.InfraFinOpsTags
+        default: { provider: oci }
+
+    capabilities:
+      manage_nodes:
+        type: cloud_native.capabilities.Cluster.Management
+        attributes:
+          api_server_endpoint: { get_attribute: [SELF, endpoints, public_endpoint] }
+
+  cloud_native.nodes.oci.OKENodePool:
+    derived_from: cloud_native.nodes.Kubernetes.KubernetesClusterNode
+    description: "Managed Node Pool for OKE."
+    properties:
+      shape:
+        type: string
+        description: "The instance shape (e.g., VM.Standard.E4.Flex)."
+        required: true
+      node_metadata:
+        type: map
+        entry_schema: { type: string }
+        required: false
+        description: "User-data or SSH keys for the nodes."
+      flex_shape_config:
+        type: map
+        required: false
+        description: "Custom OCPU and Memory configuration for Flex shapes."
+
+  cloud_native.nodes.oci.OCICertificate:
+    derived_from: cloud_native.nodes.AbstractCertificate
+    description: "Certificate managed by the OCI Certificates Service."
+    properties:
+      certificate_authority_id:
+        type: string
+        required: true

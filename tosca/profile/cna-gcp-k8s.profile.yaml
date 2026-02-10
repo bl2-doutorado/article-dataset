@@ -1,0 +1,72 @@
+tosca_definitions_version: tosca_2_0
+
+metadata:
+  template_name: "Cloud-Native Applications GCP Profile"
+  template_author: "Anonymous"
+  template_version: "1.0"
+
+imports:
+  - cna-k8s.profile.yaml
+
+node_types:
+  cloud_native.nodes.gcp.GKECluster:
+    derived_from: cloud_native.nodes.Kubernetes.KubernetesCluster
+    description: "Google Kubernetes Engine (GKE) Managed Cluster"
+    properties:
+      project_id:
+        type: string
+        description: "The GCP Project ID."
+        required: true
+      network:
+        type: string
+        default: "default"
+        description: "The VPC Network name."
+      subnetwork:
+        type: string
+        required: false
+        description: "The specific VPC subnetwork name."
+      enable_autopilot:
+        type: boolean
+        default: false
+        description: "If set to true, GCP automatically manages node provisioning and scaling (GKE Autopilot)."
+      finops:
+        type: cloud_native.datatypes.InfraFinOpsTags
+        default: { provider: gcp }
+
+    attributes:
+      cluster_ipv4_cidr: { type: string }
+      services_ipv4_cidr: { type: string }
+
+    capabilities:
+      manage_nodes:
+        type: cloud_native.capabilities.Cluster.Management
+        attributes:
+          api_server_endpoint: { get_attribute: [SELF, endpoint] }
+
+  cloud_native.nodes.gcp.GKENodePool:
+    derived_from: cloud_native.nodes.Kubernetes.KubernetesClusterNode
+    description: "Node Pool for the GKE cluster."
+    properties:
+      machine_type:
+        type: string
+        description: "GCP machine type (e.g., e2-standard-4)."
+        required: true
+      preemptible:
+        type: boolean
+        default: false
+        description: "The GCP equivalent to AWS Spot Instances for cost optimization (FinOps)."
+      disk_type:
+        type: string
+        default: "pd-standard"
+        validation:
+          - $valid_values: [pd-standard, pd-ssd, pd-balanced]
+
+  cloud_native.nodes.gcp.GCPCertificate:
+    derived_from: cloud_native.nodes.AbstractCertificate
+    description: "Certificate managed by the Google Cloud Certificate Manager."
+    properties:
+      scope:
+        type: string
+        default: "DEFAULT"
+        validation:
+          - $valid_values: [DEFAULT, EDGE_CACHE]

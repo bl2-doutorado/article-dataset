@@ -3,8 +3,9 @@
 ##########################################################################
 tosca_definitions_version: tosca_2_0
 imports:
-  - https://gitlab.com/canalbl2/tosca-templates/-/raw/main/public/templates/simple-profile.yaml
-profile: "com.canalbl2.cna:1.0.0"
+  - https://raw.githubusercontent.com/Tosca-Projects/tosca-community-contributions/refs/heads/master/profiles/org.oasis-open/simple/1.3/profile.yaml
+
+profile: "org.tosca.cna:1.0.0"
 
 metadata:
   template_name: "Cloud-Native Applications Core Profile"
@@ -13,6 +14,15 @@ metadata:
 description: Cloud-native core profile
 
 data_types:
+  cloud_native.datatypes.HealthProbe:
+    description: Use to verify containers health (liveness/readiness).
+    properties:
+      http_path: { type: string, required: false }
+      port: { type: integer, required: true }
+      initial_delay_seconds: { type: integer, default: 0 }
+      period_seconds: { type: integer, default: 10 }
+      timeout_seconds: { type: integer, default: 1 }
+      failure_threshold: { type: integer, default: 3 }
   cloud_native.datatypes.FinOpsTags:
     description: Mandatory and optional tags for financial operations (FinOps) and governance.
     properties:
@@ -23,7 +33,7 @@ data_types:
         type: string
         required: true
         validation:
-          - $valid_values: [dev, staging, prod, sandbox]
+          $valid_values: [dev, staging, prod, sandbox]
       project:
         type: string
         required: false
@@ -40,15 +50,12 @@ data_types:
       cost_center:
         type: string
         required: true
-        # Validation example: should start with CC- followed by number
-        # validation:
-        #   - pattern: '^CC-[0-9]+$'
       managed_via:
         type: string
         required: true
         default: manual
         validation:
-          - $valid_values: [manual, terraform, helm, tosca, crossplane]
+          $valid_values: [manual, terraform, helm, tosca, crossplane]
       compliance:
         type: list
         entry_schema:
@@ -83,6 +90,26 @@ data_types:
         description: The port the component is actually listening on.
         required: false # If null, than equals to 'port''
 
+  cloud_native.datatypes.ResourceRequirements:
+    derived_from: tosca.datatypes.Root
+    properties:
+      cpu_min:
+        type: string
+        required: true
+        description: "Minimum required vCPU (eg: 500m or 0.5)"
+      cpu_max:
+        type: string
+        required: false
+        description: "Maximum limit for vCPU"
+      mem_min:
+        type: string
+        required: true
+        description: "Minimum required memory (eg: 256Mi ou 256MB)"
+      mem_max:
+        type: string
+        required: false
+        description: "Maximum limit for memory"
+
   cloud_native.datatypes.ContainerDefinition:
     derived_from: tosca.datatypes.Root
     description: Common container data
@@ -90,8 +117,7 @@ data_types:
       name: { type: string, required: true }
       image: { type: string, required: true }
       resources:
-        type: map
-        entry_schema: { type: string } # ex: cpu: 500m, memory: 512Mi
+        type: cloud_native.datatypes.ResourceRequirements
         required: true
       ports:
         description: List of ports exposed by the application running inside the container
@@ -99,7 +125,15 @@ data_types:
         entry_schema: { type: cloud_native.datatypes.PortMapping }
       env_vars:
         type: map
+        description: Container environment variables.
         entry_schema: { type: string }
+      # Inclusão de Probes para Service Mesh e Orquestradores
+      liveness_probe:
+        type: cloud_native.datatypes.HealthProbe
+        required: false
+      readiness_probe:
+        type: cloud_native.datatypes.HealthProbe
+        required: false
 
   cloud_native.datatypes.AbstractComponentScalability:
     description: Defines horizontal scaling boundaries for a component.
@@ -109,7 +143,7 @@ data_types:
         required: true
         default: 1
         validation:
-          - $greater_or_equal: 0
+          $greater_or_equal: 0
 
       max_instances:
         type: integer
@@ -136,13 +170,13 @@ data_types:
         required: false
         description: "Target cpu metric to trigger scaling."
         validation:
-          - $in_range: [1, 100]
+          $in_range: [1, 100]
       target_mem_utilization:
         type: integer
         required: false
         description: "Target cpu metric to trigger scaling."
         validation:
-          - $in_range: [1, 100]
+          $in_range: [1, 100]
 
   cloud_native.datatypes.AbstractComponentUpdateStrategy:
     description: Strategy for updating components without downtime.
@@ -152,7 +186,7 @@ data_types:
         description: Name of the strategy.
         required: true
         validation:
-          - $valid_values: [rolling_update, recreate, blue_green, canary]
+          $valid_values: [rolling_update, recreate, blue_green, canary]
         default: rolling_update
 
       max_surge:
@@ -210,7 +244,7 @@ data_types:
       path_type:
         type: string
         validation:
-          - $valid_values: [Prefix, Exact, ImplementationSpecific]
+          $valid_values: [Prefix, Exact, ImplementationSpecific]
         default: Prefix
 
   cloud_native.datatypes.IngressRule:
@@ -218,7 +252,7 @@ data_types:
     properties:
       host:
         type: string
-        description: "Ex: api.myproject.com"
+        description: "Eg: api.myproject.com"
         required: true
       paths:
         type: list
@@ -271,26 +305,25 @@ node_types:
         type: string
         default: stateless
         validation:
-          - $valid_values: [stateless, stateful]
+          $valid_values: [stateless, stateful]
         description: >
           'stateless' maps to a Deployment (anonymous pods). 
           'stateful' maps to a StatefulSet (ordered, stable identity).
       containers:
         type: list
         entry_schema: { type: cloud_native.datatypes.ContainerDefinition }
-        $validation: { $min_length: 1 }
+        validation: { $min_length: 1 }
       env_vars:
         type: map
         entry_schema: { type: string }
-        description: "Environment variables (will be converted in secrets)."
+        description: "Environment variables common to every container."
 
       config_files:
         type: map
         entry_schema:
           type: cloud_native.datatypes.ConfigResource
-        description: "Mpas filename to its content and destiny."
+        description: "Maps filename to its content and destiny."
 
-      # Cloud specific
       additional_metadata:
         type: map
         entry_schema: { type: string }
@@ -299,12 +332,12 @@ node_types:
       scheduling_requirements:
         type: list
         entry_schema: { type: string } # Eg: ["dedicated:db", "gpu:true"]
-      # Propriedade movida para o componente
+
       scheduling_mode:
         type: string
         default: flexible
-        constraints:
-          - valid_values: [strict, flexible]
+        validation:
+          valid_values: [strict, flexible]
 
     requirements:
       - workspace:
@@ -380,27 +413,24 @@ node_types:
         type: tosca.capabilities.Compute
         valid_source_types: [cloud_native.nodes.AbstractComponent]
     properties:
-      # 1. HARDWARE (O "Instance Type" generalizado)
       instance_type:
         type: string
         required: true
-        description: "Tamanho/Família da máquina (ex: t3.medium, n1-standard-1)."
+        description: "Instance family and size (e.g., t3.medium, n1-standard-1)."
 
-      # 2. MODELO DE PROVISIONAMENTO (Agnóstico)
       provisioning_model:
         type: string
         default: standard
-        description: "Modelo de compra da capacidade."
+        description: "Capacity purchase model."
         validation:
-          - $valid_values: [standard, spot, reserved]
+          $valid_values: [standard, spot, reserved]
 
-      # 3. CATEGORIA DE IMAGEM (O "AMI Type" generalizado)
       image_category:
         type: string
         default: linux_optimized
-        description: "Categoria do SO para que o driver escolha a imagem correta."
+        description: "OS category used by the driver to select the appropriate image."
         validation:
-          - $valid_values: [linux_optimized, hardened_container_os, windows, arm_optimized]
+          $valid_values: [linux_optimized, hardened_container_os, windows, arm_optimized]
 
   cloud_native.nodes.AbstractContainerOrchestratorCluster:
     description: A cluster managed by a Container Orchestrator like Kubernetes or Nomad.
@@ -424,7 +454,7 @@ node_types:
       define_Storages:
         type: cloud_native.capabilities.Cluster.StorageDefinition
 
-  cloud_native.nodes. AbstractContainerOrchestratorClusterNode:
+  cloud_native.nodes.AbstractContainerOrchestratorClusterNode:
     derived_from: cloud_native.nodes.AbstractInfrastructure
     description: A cluster node managed by a Container Orchestrator like Kubernetes or Nomad.
     properties:
@@ -432,7 +462,7 @@ node_types:
         type: string
         default: worker
         validation:
-          - $valid_values: [worker, ingress, storage, master]
+          $valid_values: [worker, ingress, storage, master]
 
       instance_type: { type: string, required: false }
     requirements:
@@ -464,13 +494,13 @@ node_types:
           required: true
           default: internal
           validation:
-            - $valid_values: [internal, node, external, headless]
+            $valid_values: [internal, node, external, headless]
 
         protocol:
           type: string
           default: TCP
           validation:
-            - $valid_values: [TCP, UDP, SCTP, HTTP, GRPC]
+            $valid_values: [TCP, UDP, SCTP, HTTP, GRPC]
         load_balancer_config:
           type: cloud_native.datatypes.LoadBalancerConfig
           required: false
@@ -535,7 +565,7 @@ node_types:
       common_name:
         type: string
         required: true
-        description: "O domínio principal (ex: api.empresa.com)"
+        description: "The main domain (ex: api.empresa.com)"
       alt_names:
         type: list
         entry_schema: { type: string }
@@ -614,7 +644,7 @@ relationship_types:
         type: string
         default: ReadWriteOnce
         validation:
-          - $valid_values: [ReadWriteOnce, ReadOnlyMany, ReadWriteMany]
+          $valid_values: [ReadWriteOnce, ReadOnlyMany, ReadWriteMany]
         description: Defines how the component access the volume.
 
   cloud_native.relationships.ManagedBy:
@@ -648,7 +678,7 @@ relationship_types:
       mount_path:
         type: string
         required: true
-        description: "O caminho dentro do container (ex: /var/lib/mysql)"
+        description: "The path inside container (gx: /var/lib/mysql)"
       read_only:
         type: boolean
         default: false
@@ -665,7 +695,7 @@ relationship_types:
         type: string
         default: cluster
         validation:
-          - $valid_values: [local, cluster]
+          $valid_values: [local, cluster]
 
 policy_types:
   cloud_native.policies.LocalityEnforcement:
@@ -681,11 +711,11 @@ policy_types:
         default: ["provider", "region"]
   cloud_native.policies.CloudDistribution:
     derived_from: tosca.policies.Root
-    description: "Define a estratégia de sobrevivência entre diferentes provedores."
+    description: "Defines how must be the distribution strategy between providers."
     properties:
       strategy:
         type: string
-        constraints: [{ $valid_values: [mirror, distributed] }]
+        validation: { $valid_values: [mirror, distributed] }
         description: "Mirror: Identical replication of instances across providers. Distributed: Asymmetrical allocation, allowing a variable number of instances per provider."
       min_providers:
         type: integer
@@ -693,6 +723,7 @@ policy_types:
       allowed_providers:
         type: list
         entry_schema: { type: string }
+        default: ["aws", "gcp", "oci"]
 
   cloud_native.policies.Sustainability:
     derived_from: tosca.policies.Root
@@ -715,7 +746,7 @@ policy_types:
         type: string
         default: rollback
         validation:
-          - $valid_values: [rollback, stay, retry]
+          $valid_values: [rollback, stay, retry]
       max_retries:
         type: integer
         default: 3
@@ -738,13 +769,13 @@ policy_types:
           description: "Type list that should never be automatically removed."
   cloud_native.policies.SchedulingStrategy:
     derived_from: tosca.policies.Root
-    description: "Define como o orquestrador deve aplicar o mapeamento físico do MILP"
+    description: "Defines how the orchestrator must apply the physical mapping of MILP"
     properties:
       mode:
         type: string
         required: true
-        constraints:
-          - valid_values: [strict, flexible]
+        validation:
+          valid_values: [strict, flexible]
       target_scope:
         type: string
-        default: "all" # Pode ser aplicado a toda a topologia ou a grupos específicos
+        default: "all"

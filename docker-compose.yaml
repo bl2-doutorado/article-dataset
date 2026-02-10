@@ -1,0 +1,12 @@
+services:
+  milp:
+    build:
+      # context: java/milp/build/docker/optimized
+      dockerfile: Dockerfile
+    ports:
+      - 8183:8183
+    volumes:
+      # Mapeia a pasta de experimentos local para um local fixo no container
+      - ./clouds_data:/home/app/clouds_data
+      - ./experiments:/home/app/experiments
+  

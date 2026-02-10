@@ -1,0 +1,194 @@
+tosca_definitions_version: tosca_2_0
+
+metadata:
+  template_name: Healthcare_Integrated_Stack
+  description: "Topologia completa com instâncias e dependências usando anchors e blocos de containers"
+
+imports:
+  - profiles/cna-k8s.profile.yaml
+
+service_template:
+  node_templates:
+    # --- Camada de Dados (STRICT) ---
+
+    postgresql:
+      type: cloud_native.nodes.StorageBackingService
+      properties:
+        finops: &health_finops
+          application: "healthcare-system"
+          team: "platform-team"
+          environment: "prod"
+          cost_center: "HC-999"
+          managed_via: "tosca-milp"
+        containers:
+          - name: postgres
+            image: "postgres:15-alpine"
+            resources: { cpu_min: "1500m", mem_min: "4Gi" }
+        scalability:
+          min_instances: 1
+          max_instances: 3
+          default_instances: 3
+
+    mongodb:
+      type: cloud_native.nodes.StorageBackingService
+      properties:
+        scheduling_mode: strict
+        finops: *health_finops
+        containers:
+          - name: mongodb
+            image: "mongo:6.0"
+            resources: { cpu_min: "1200m", mem_min: "4Gi" }
+        scalability:
+          min_instances: 1
+          max_instances: 3
+          default_instances: 3
+
+    redis:
+      type: cloud_native.nodes.StorageBackingService
+      properties:
+        scheduling_mode: flexible
+        finops: *health_finops
+        containers:
+          - name: redis
+            image: "redis:7-alpine"
+            resources: { cpu_min: "300m", mem_min: "512Mi" }
+        scalability:
+          min_instances: 1
+          max_instances: 1
+          default_instances: 2
+
+    # --- Camada de Serviços (FLEXIBLE) ---
+
+    frontend:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: *health_finops
+        containers:
+          - name: frontend
+            image: "health/frontend:latest"
+            resources   : { cpu_min: "150m", mem_min: "256Mi" }
+        scalability:
+          min_instances: 1
+          max_instances: 3
+          default_instances: 3
+      requirements:
+        - database: api_gateway
+
+    auth_service:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: *health_finops
+        containers:
+          - name: auth-api
+            image: "health/auth-service:latest"
+            resources: { cpu_min: "400m", mem_min: "1024Mi" }
+        scalability:
+          min_instances: 1
+          max_instances: 2
+          default_instances: 2
+      requirements:
+        - database: postgresql
+
+    appointments_svc:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: *health_finops
+        containers:
+          - name: appointments-api
+            image: "health/appointments:latest"
+            resources: { cpu_min: "1000m", mem_min: "2Gi" }
+        scalability:
+          min_instances: 1
+          max_instances: 3
+          default_instances: 3
+      requirements:
+        - database: postgresql
+
+    lab_tests_quarkus:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: *health_finops
+        containers:
+          - name: lab-tests
+            image: "health/lab-tests-quarkus:latest"
+            resources: { cpu_min: "300m", mem_min: "512Mi" }
+        scalability:
+          min_instances: 1
+          max_instances: 2
+          default_instances: 2
+      requirements:
+        - database: mongodb
+
+    medical_records_micronaut:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: *health_finops
+        containers:
+          - name: medical-records
+            image: "health/records-micronaut:latest"
+            resources: { cpu_min: "300m", mem_min: "512Mi" }
+        scalability:
+          min_instances: 1
+          max_instances: 2
+          default_instances: 2
+      requirements:
+        - database: mongodb
+
+    notifications_node:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: *health_finops
+        containers:
+          - name: notifications
+            image: "health/notifications-node:latest"
+            resources: { cpu_min: "150m", mem_min: "256Mi" }
+        scalability:
+          min_instances: 1
+          max_instances: 2
+          default_instances: 2
+      requirements:
+        - cache: redis
+
+    # --- API Gateway (FLEXIBLE + Configs Adicionais) ---
+
+    api_gateway:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: *health_finops
+        gateway_config:
+          health_check_interval: 30s
+          sticky_sessions: true
+          ssl_termination: true
+        containers:
+          - name: gateway
+            image: "health/api-gateway:latest"
+            resources: { cpu_min: "800m", mem_min: "1024Mi" }
+        scalability:
+          min_instances: 1
+          max_instances: 3
+          default_instances: 3
+      requirements:
+        - auth_link: auth_service
+        - appointments_link: appointments_svc
+        - labs_link: lab_tests_quarkus
+        - records_link: medical_records_micronaut
+        - notify_link: notifications_node
+
+policies:
+  - global_carbon:
+      type: cloud_native.policies.Sustainability
+      properties:
+        max_total_carbon_footprint: 0.018336156
+  - mirroring:
+      type: cloud_native.policies.CloudDistribution
+      properties:
+        strategy: distributed
+        min_providers: 1
+        allowed_providers: ["aws", "gcp", "oci"]

@@ -4,13 +4,13 @@
 tosca_definitions_version: tosca_2_0
 imports:
   - cna-core.profile.yaml
-profile: "com.canalbl2.cna.k8s:1.0.0"
+profile: "org.tosca.cna.k8s:1.0.0"
 
 metadata:
   template_name: "Cloud-Native Applications K8S Profile"
   template_author: "Anonymous"
   template_version: "1.0"
-description: Cloud-native core profile
+description: Cloud-native Kubernetes (K8S) profile
 
 # Kubernetes-specific Node Types
 cloud_native.nodes.Kubernetes.Namespace:
@@ -35,13 +35,13 @@ cloud_native.nodes.Kubernetes.NetworkService:
       type: string
       default: None
       validation:
-        - valid_values: [None, ClientIP]
+        $valid_values: [None, ClientIP]
 
     external_traffic_policy:
       type: string
       default: Cluster
       validation:
-        - valid_values: [Local, Cluster]
+        $valid_values: [Local, Cluster]
       description: "Controls if traffic is routed to local-node pods or cluster-wide."
 
     load_balancer_source_ranges:
@@ -58,13 +58,12 @@ cloud_native.nodes.kubernetes.CertManagerCertificate:
       default: "letsencrypt-prod"
     dns_challenge_provider:
       type: string
-      required: false # Para validação automática via DNS
+      required: false
 
 cloud_native.nodes.kubernetes.NetworkIngress:
   derived_from: cloud_native.nodes.AbstractNetworkIngress
   requirements:
     - certificate:
-        # Aqui acontece a restrição:
         node: cloud_native.nodes.kubernetes.CertManagerCertificate
         occurrences: [0, 1]
 
@@ -72,7 +71,6 @@ cloud_native.nodes.Kubernetes.KubernetesApplication:
   description: A Kubernetes deployable application that implements business features.
   derived_from: cloud_native.nodes.Service
   properties:
-    # A mágica acontece aqui: uma lista de containers
     containers:
       type: list
       entry_schema: { type: cloud_native.datatypes.ContainerDefinition }
@@ -81,26 +79,22 @@ cloud_native.nodes.Kubernetes.KubernetesApplication:
     - placement:
         node: cloud_native.nodes.Kubernetes.KubernetesClusterNode
         relationship: tosca.relationships.HostedOn
-    # O armazenamento agora é mapeado via nome do container
     - storage:
         capability: tosca.capabilities.Attachment
         node: cloud_native.nodes.Kubernetes.AbstractKubernetesVolume
         relationship: cloud_native.relationships.MountsTo
         occurrences: [0, UNBOUNDED]
-  # Helm strategy
+
   artifacts:
-    # O Modelador coloca o Helm Chart aqui
     chart_source:
       type: tosca.artifacts.File
       file: charts/my-app/
-    # O Orquestrador preenche este aqui após o 'helm template'
     generated_manifest:
       type: tosca.artifacts.File
       required: false
   interfaces:
     Standard:
       create:
-        # O script de deploy agora é apenas um executor burro de kubectl
         implementation: scripts/kubectl_apply.sh
         inputs:
           manifest: { get_artifact: [SELF, generated_manifest] }
@@ -140,7 +134,6 @@ cloud_native.nodes.Kubernetes.KubernetesCluster:
   description: Kubernetes cluster managed by a specific distribution (K0s, K3s, RKE2, etc).
   derived_from: cloud_native.nodes.AbstractContainerOrchestratorCluster
   properties:
-    # Propriedades específicas de K8s para automação de rede
     pod_cidr:
       type: string
       default: "10.42.0.0/16"
@@ -168,18 +161,6 @@ cloud_native.nodes.Kubernetes.KubernetesClusterNode:
     max_size:
       type: integer
       default: 10
-    # Labels e Taints são fundamentais para o agendamento de pods
-    #labels:
-    #  type: map
-    #  entry_schema: { type: string }
-    #  required: false
-    #  description: "Kubernetes node labels (e.g., disktype: ssd)."
-    #taints:
-    #  type: list
-    #  entry_schema:
-    #    type: string # Exemplo: "key=value:effect"
-    #  required: false
-    #  description: "Kubernetes node taints to repel pods."
   requirements:
     - cluster:
         node: cloud_native.nodes.Kubernetes.KubernetesCluster
@@ -189,7 +170,6 @@ cloud_native.nodes.Kubernetes.KubernetesClusterNode:
     Standard:
       create:
         inputs:
-          # Capturando dados do alvo (TARGET) do relacionamento 'cluster'
           join_token: { get_attribute: [SELF, cluster, bootstrap_token] }
           master_ip: { get_attribute: [SELF, cluster, api_server_endpoint] }
           ca_cert: { get_attribute: [SELF, cluster, cluster_ca_cert] }
@@ -213,8 +193,8 @@ cloud_native.nodes.Kubernetes.HostPathKubernetesVolume:
       required: false
       default: Directory
       validation:
-        - valid_values:
-            ["", DirectoryOrCreate, Directory, FileOrCreate, File, Socket, CharDevice, BlockDevice]
+        $valid_values:
+          ["", DirectoryOrCreate, Directory, FileOrCreate, File, Socket, CharDevice, BlockDevice]
   derived_from: cloud_native.nodes.Kubernetes.AbstractKubernetesVolume
 
 cloud_native.nodes.Kubernetes.SecretKubernetesVolume:

@@ -32,8 +32,10 @@ This section details the environment required to execute and replicate the exper
 
 ## Directory Structure
 
+* clouds_data - Holds [cloud prices and carbon footprint data](clouds_data/cloud_machine_types_cost_and_monthly_carbon_footprint.csv)
+* experiments - Contains [yamls](experiments/yamls/) used to make the experiments
 * tosca - Contains TOSCA-related files.
-  * profile: Contains the cloud-native-applications profile definitions (cna-core.yaml, cna-k8s.yaml, cna-infra.yaml).
+  * [profile](tosca/profile/README.md): Contains the cloud-native-applications profile documentation and definitions.
   * templates: Contains the TOSCA templates used for the experiments presented in the paper.
 * hvitops - Contains the HVitOps (Healthcare Microservices Application) used as a case study.
 
@@ -70,7 +72,7 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
 
-#### Node / fnn (https://nodejs.org/en/download)
+<!-- #### Node / fnn (https://nodejs.org/en/download)
 
 ```shell
 # Download and install fnm:
@@ -86,7 +88,7 @@ node -v # Should print "v22.14.0".
 
 # Verify npm version:
 npm -v # Should print "10.9.2".
-```
+``` -->
 
 # Security Concerns
 
@@ -96,9 +98,9 @@ npm -v # Should print "10.9.2".
 
 <!-- O processo de baixar e instalar a aplicação deve ser descrito nesta seção. Ao final deste processo já é esperado que a aplicação/benchmark/ferramenta consiga ser executada. -->
 
-To configure the environment, ensure all [Dependencies](#dependências) are installed and operational, particularly the Docker engine.
+To configure the environment, ensure all [Dependencies](#dependencies) are installed and operational, particularly the Docker engine.
 
-The `docker-compose.yml` file defines the environment required to run the application. To simplify execution, we provide a `run.sh` script that automates the deployment and testing process.
+The `docker-compose.yml` file defines the environment required to run the application (MILP). To simplify execution, we provide a `run.sh` script that automates the deployment and testing process.
 
 Alternatively, services can be executed manually by following the instructions in each respective directory. 
 
@@ -138,10 +140,10 @@ Once dependencies are configured, execute the demonstration script to test the a
 
 ## Usage
 
-The `run.sh` script provides a complete workflow, supporting both local and remote templates.
+The `run.sh` script provides a complete workflow, testing the three scenarios presetend on the article.
 
 ```
-run.sh
+./run.sh
 ```
 
 # Experiments
@@ -153,22 +155,7 @@ Caso o processo para a reprodução de todos os experimento não seja possível 
 
 
 
-## Scenario A - Single vs. Multi-Cloud Mirroring
-
-**Objective:** Compare cost and carbon trade-offs between single-provider and multi-cloud mirrored deployments.
-
-**Execution:** [Command here]
-
-**Expected Time:** [X] minutes
-
-## Scenario B - The Pareto Frontier (Cost vs. Carbon)
-
-**Objective:** Analyze the sensitivity of the MILP model when varying carbon caps.
-
-**Expected Result:** A frontier showing the "Green Premium" as carbon constraints tighten.
-
-## Scenario C - Computational Performance and Scalability
-**Objective:** Measure solver execution time across varying topology complexities.
+Please see this [README](experiments/README.md).
 
 # LICENSE
 <!-- Apresente a licença. -->

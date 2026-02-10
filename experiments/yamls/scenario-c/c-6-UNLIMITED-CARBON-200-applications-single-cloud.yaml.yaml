@@ -1,0 +1,2618 @@
+tosca_definitions_version: tosca_2_0
+metadata:
+  template_name: Generated_200_Apps_Scenario
+  description: Template created via CLI for testing MILP
+imports:
+- profiles/cna-k8s.profile.yaml
+service_template:
+  node_templates:
+    app-01:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops:
+          application: generic-workload
+          team: research-team
+          environment: test
+          cost_center: GEN-001
+          managed_via: tosca-milp
+        containers:
+        - name: main
+          image: generic/app-01:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-02:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-02:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-03:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-03:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-04:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-04:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 2
+    app-05:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-05:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-06:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-06:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-07:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-07:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-08:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-08:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 2
+    app-09:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-09:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 3
+    app-10:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-10:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 2
+    app-11:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-11:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-12:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-12:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 3
+    app-13:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-13:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 1
+    app-14:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-14:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 2
+    app-15:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-15:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-16:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-16:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-17:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-17:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-18:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-18:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-19:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-19:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-20:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-20:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-21:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-21:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 1
+    app-22:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-22:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 1
+    app-23:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-23:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 1
+    app-24:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-24:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-25:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-25:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-26:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-26:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-27:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-27:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 1
+    app-28:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-28:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 1
+    app-29:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-29:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-30:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-30:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-31:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-31:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 1
+    app-32:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-32:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-33:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-33:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-34:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-34:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-35:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-35:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-36:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-36:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-37:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-37:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-38:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-38:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-39:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-39:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 2
+    app-40:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-40:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-41:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-41:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-42:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-42:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-43:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-43:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-44:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-44:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 1
+    app-45:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-45:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-46:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-46:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 2
+    app-47:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-47:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-48:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-48:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 1
+    app-49:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-49:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-50:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-50:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 2
+    app-51:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-51:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-52:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-52:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-53:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-53:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-54:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-54:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 2
+    app-55:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-55:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-56:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-56:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 2
+    app-57:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-57:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-58:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-58:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 1
+    app-59:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-59:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-60:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-60:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-61:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-61:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-62:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-62:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-63:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-63:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-64:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-64:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-65:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-65:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-66:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-66:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-67:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-67:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-68:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-68:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-69:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-69:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-70:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-70:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-71:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-71:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-72:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-72:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 3
+    app-73:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-73:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-74:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-74:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-75:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-75:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-76:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-76:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 2
+    app-77:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-77:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-78:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-78:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-79:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-79:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 2
+    app-80:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-80:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-81:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-81:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 2
+    app-82:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-82:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-83:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-83:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-84:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-84:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-85:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-85:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-86:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-86:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 2
+    app-87:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-87:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-88:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-88:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-89:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-89:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 2
+    app-90:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-90:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 1
+    app-91:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-91:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 1
+    app-92:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-92:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-93:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-93:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 2
+    app-94:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-94:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-95:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-95:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-96:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-96:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 1
+    app-97:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-97:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-98:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-98:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 1
+    app-99:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-99:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-100:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-100:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-101:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-101:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-102:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-102:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-103:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-103:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-104:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-104:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 1
+    app-105:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-105:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-106:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-106:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-107:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-107:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-108:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-108:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-109:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-109:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-110:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-110:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 1
+    app-111:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-111:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-112:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-112:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-113:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-113:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 1
+    app-114:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-114:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-115:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-115:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 1
+    app-116:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-116:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 1
+    app-117:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-117:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 1
+    app-118:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-118:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-119:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-119:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-120:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-120:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-121:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-121:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 1
+    app-122:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-122:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-123:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-123:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 1
+    app-124:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-124:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 1
+    app-125:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-125:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 2
+    app-126:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-126:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-127:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-127:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-128:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-128:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 1
+    app-129:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-129:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 1
+    app-130:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-130:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 2
+    app-131:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-131:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-132:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-132:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 3
+    app-133:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-133:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-134:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-134:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-135:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-135:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-136:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-136:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-137:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-137:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 1
+    app-138:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-138:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-139:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-139:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 2
+    app-140:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-140:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-141:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-141:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 3
+    app-142:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-142:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-143:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-143:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-144:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-144:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-145:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-145:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-146:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-146:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-147:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-147:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-148:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-148:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-149:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-149:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-150:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-150:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-151:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-151:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-152:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-152:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-153:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-153:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-154:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-154:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 1
+    app-155:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-155:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-156:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-156:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-157:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-157:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-158:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-158:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-159:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-159:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-160:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-160:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 3
+    app-161:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-161:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 1
+    app-162:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-162:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-163:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-163:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-164:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-164:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-165:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-165:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-166:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-166:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-167:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-167:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 2
+    app-168:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-168:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 3
+    app-169:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-169:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-170:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-170:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-171:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-171:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-172:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-172:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-173:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-173:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-174:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-174:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-175:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-175:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-176:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-176:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 2
+    app-177:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-177:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 1
+    app-178:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-178:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 1
+    app-179:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-179:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-180:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-180:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-181:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-181:latest
+          resources:
+            cpu_min: 150m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-182:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-182:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 256Mi
+        scalability:
+          default_instances: 2
+    app-183:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-183:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 1
+    app-184:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-184:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-185:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-185:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-186:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-186:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-187:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-187:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-188:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-188:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-189:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-189:latest
+          resources:
+            cpu_min: 1500m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-190:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-190:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 2
+    app-191:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-191:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-192:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-192:latest
+          resources:
+            cpu_min: 450m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 1
+    app-193:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-193:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 512Mi
+        scalability:
+          default_instances: 3
+    app-194:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-194:latest
+          resources:
+            cpu_min: 1000m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-195:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-195:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 3
+    app-196:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-196:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+    app-197:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-197:latest
+          resources:
+            cpu_min: 600m
+            mem_min: 2048Mi
+        scalability:
+          default_instances: 1
+    app-198:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: strict
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-198:latest
+          resources:
+            cpu_min: 1200m
+            mem_min: 4096Mi
+        scalability:
+          default_instances: 3
+    app-199:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-199:latest
+          resources:
+            cpu_min: 300m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 1
+    app-200:
+      type: cloud_native.nodes.Service
+      properties:
+        scheduling_mode: flexible
+        finops: '*gen_finops'
+        containers:
+        - name: main
+          image: generic/app-200:latest
+          resources:
+            cpu_min: 800m
+            mem_min: 1024Mi
+        scalability:
+          default_instances: 3
+policies:
+- global_carbon:
+    type: cloud_native.policies.Sustainability
+    properties:
+      max_total_carbon_footprint: 250
