@@ -1,0 +1,259 @@
+{
+  "solverResults" : {
+    "gap" : "0.000",
+    "costZ" : 467.98,
+    "status" : "OPTIMAL"
+  },
+  "scenario" : "Test_02",
+  "infrastructure" : {
+    "globalCpuUtilizationPct" : 95.32352941176471,
+    "instances" : [ {
+      "memUtilizationPct" : 37.5,
+      "allocations" : [ {
+        "app" : "app-13",
+        "vcpuUsed" : 1100.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-19",
+        "vcpuUsed" : 500.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.02355435,
+      "cpuUtilizationPct" : 80.0,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_15: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 34.375,
+      "allocations" : [ {
+        "app" : "app-03",
+        "vcpuUsed" : 400.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-05",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-06",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-07",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-10",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-11",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-15",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-16",
+        "vcpuUsed" : 750.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-18",
+        "vcpuUsed" : 200.0,
+        "memUsed" : 256.0
+      } ],
+      "carbonEmission" : 0.047108701,
+      "cpuUtilizationPct" : 86.25,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_16: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 34.375,
+      "allocations" : [ {
+        "app" : "app-03",
+        "vcpuUsed" : 400.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-05",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-06",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-07",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-10",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-11",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-15",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-16",
+        "vcpuUsed" : 750.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-18",
+        "vcpuUsed" : 200.0,
+        "memUsed" : 256.0
+      } ],
+      "carbonEmission" : 0.047108701,
+      "cpuUtilizationPct" : 86.25,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_16: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 61.71875,
+      "allocations" : [ {
+        "app" : "app-01",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-02",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-04",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-08",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-09",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-12",
+        "vcpuUsed" : 920.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-14",
+        "vcpuUsed" : 250.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-17",
+        "vcpuUsed" : 1300.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-20",
+        "vcpuUsed" : 850.0,
+        "memUsed" : 2048.0
+      } ],
+      "carbonEmission" : 0.094217403,
+      "cpuUtilizationPct" : 99.625,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_17: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 61.71875,
+      "allocations" : [ {
+        "app" : "app-01",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-02",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-04",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-08",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-09",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-12",
+        "vcpuUsed" : 920.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-14",
+        "vcpuUsed" : 250.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-17",
+        "vcpuUsed" : 1300.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-20",
+        "vcpuUsed" : 850.0,
+        "memUsed" : 2048.0
+      } ],
+      "carbonEmission" : 0.094217403,
+      "cpuUtilizationPct" : 99.625,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_17: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 61.71875,
+      "allocations" : [ {
+        "app" : "app-01",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-02",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-04",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-08",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-09",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-12",
+        "vcpuUsed" : 920.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-14",
+        "vcpuUsed" : 250.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-17",
+        "vcpuUsed" : 1300.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-20",
+        "vcpuUsed" : 850.0,
+        "memUsed" : 2048.0
+      } ],
+      "carbonEmission" : 0.094217403,
+      "cpuUtilizationPct" : 99.625,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_17: Compute-Standard-E3"
+    } ],
+    "globalMemUtilizationPct" : 53.86029411764706
+  },
+  "performanceMetrics" : {
+    "wallTimeSeconds" : 0.412,
+    "detTime" : "0.081",
+    "branches" : 40
+  },
+  "inputMetrics" : {
+    "analyzedCloudProviders" : 3,
+    "targetCloudProviders" : 1,
+    "apps" : 20
+  },
+  "totalCarbon" : 0.0400423961,
+  "modelComplexity" : {
+    "intVars" : 640,
+    "totalVars" : 1105,
+    "boolVars" : 465
+  }
+}

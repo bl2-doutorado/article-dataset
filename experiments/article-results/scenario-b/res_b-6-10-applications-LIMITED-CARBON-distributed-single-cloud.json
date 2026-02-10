@@ -1,0 +1,157 @@
+{
+  "solverResults" : {
+    "gap" : "0.013",
+    "costZ" : 542.77,
+    "status" : "OPTIMAL"
+  },
+  "scenario" : "Test_01",
+  "infrastructure" : {
+    "globalCpuUtilizationPct" : 76.5909090909091,
+    "instances" : [ {
+      "memUtilizationPct" : 18.75,
+      "allocations" : [ {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "notifications_node",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.018118731,
+      "cpuUtilizationPct" : 55.00000000000001,
+      "cloudProvider" : "GCP",
+      "type" : "Machine_8: n2d-standard-2"
+    }, {
+      "memUtilizationPct" : 64.0625,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "notifications_node",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      } ],
+      "carbonEmission" : 0.036237463,
+      "cpuUtilizationPct" : 96.25,
+      "cloudProvider" : "GCP",
+      "type" : "Machine_9: n2d-standard-4"
+    }, {
+      "memUtilizationPct" : 42.96875,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "redis",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "auth_service",
+        "vcpuUsed" : 400.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "lab_tests_quarkus",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "medical_records_micronaut",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.072474926,
+      "cpuUtilizationPct" : 74.375,
+      "cloudProvider" : "GCP",
+      "type" : "Machine_10: n2d-standard-8"
+    }, {
+      "memUtilizationPct" : 42.96875,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "redis",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "auth_service",
+        "vcpuUsed" : 400.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "lab_tests_quarkus",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "medical_records_micronaut",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.072474926,
+      "cpuUtilizationPct" : 74.375,
+      "cloudProvider" : "GCP",
+      "type" : "Machine_10: n2d-standard-8"
+    } ],
+    "globalMemUtilizationPct" : 44.60227272727273
+  },
+  "performanceMetrics" : {
+    "wallTimeSeconds" : 0.106,
+    "detTime" : "0.022",
+    "branches" : 188
+  },
+  "inputMetrics" : {
+    "analyzedCloudProviders" : 3,
+    "targetCloudProviders" : 1,
+    "apps" : 10
+  },
+  "totalCarbon" : 0.0199306046,
+  "modelComplexity" : {
+    "intVars" : 193,
+    "totalVars" : 328,
+    "boolVars" : 135
+  }
+}

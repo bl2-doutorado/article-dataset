@@ -1,0 +1,285 @@
+{
+  "solverResults" : {
+    "gap" : "0.000",
+    "costZ" : 845.58,
+    "status" : "OPTIMAL"
+  },
+  "scenario" : "Test_01",
+  "infrastructure" : {
+    "globalCpuUtilizationPct" : 78.4090909090909,
+    "instances" : [ {
+      "memUtilizationPct" : 53.125,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      } ],
+      "carbonEmission" : 0.018118731,
+      "cpuUtilizationPct" : 82.5,
+      "cloudProvider" : "GCP",
+      "type" : "Machine_8: n2d-standard-2"
+    }, {
+      "memUtilizationPct" : 43.75,
+      "allocations" : [ {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.036237463,
+      "cpuUtilizationPct" : 75.0,
+      "cloudProvider" : "GCP",
+      "type" : "Machine_9: n2d-standard-4"
+    }, {
+      "memUtilizationPct" : 43.75,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "redis",
+        "vcpuUsed" : 500.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "auth_service",
+        "vcpuUsed" : 400.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "lab_tests_quarkus",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "medical_records_micronaut",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "notifications_node",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.072474926,
+      "cpuUtilizationPct" : 78.75,
+      "cloudProvider" : "GCP",
+      "type" : "Machine_10: n2d-standard-8"
+    }, {
+      "memUtilizationPct" : 43.75,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "redis",
+        "vcpuUsed" : 500.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "auth_service",
+        "vcpuUsed" : 400.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "lab_tests_quarkus",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "medical_records_micronaut",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "notifications_node",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.072474926,
+      "cpuUtilizationPct" : 78.75,
+      "cloudProvider" : "GCP",
+      "type" : "Machine_10: n2d-standard-8"
+    }, {
+      "memUtilizationPct" : 56.25,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "lab_tests_quarkus",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      } ],
+      "carbonEmission" : 0.02355435,
+      "cpuUtilizationPct" : 90.0,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_15: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 48.4375,
+      "allocations" : [ {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "lab_tests_quarkus",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.047108701,
+      "cpuUtilizationPct" : 86.25,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_16: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 42.1875,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "redis",
+        "vcpuUsed" : 500.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "auth_service",
+        "vcpuUsed" : 400.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "medical_records_micronaut",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "notifications_node",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.094217403,
+      "cpuUtilizationPct" : 75.0,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_17: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 42.1875,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "redis",
+        "vcpuUsed" : 500.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "auth_service",
+        "vcpuUsed" : 400.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "medical_records_micronaut",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "notifications_node",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.094217403,
+      "cpuUtilizationPct" : 75.0,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_17: Compute-Standard-E3"
+    } ],
+    "globalMemUtilizationPct" : 44.60227272727273
+  },
+  "performanceMetrics" : {
+    "wallTimeSeconds" : 0.208,
+    "detTime" : "0.068",
+    "branches" : 230
+  },
+  "inputMetrics" : {
+    "analyzedCloudProviders" : 3,
+    "targetCloudProviders" : 2,
+    "apps" : 10
+  },
+  "totalCarbon" : 0.0458403903,
+  "modelComplexity" : {
+    "intVars" : 295,
+    "totalVars" : 529,
+    "boolVars" : 234
+  }
+}

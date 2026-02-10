@@ -9,7 +9,7 @@ CSV_DATA_ORIGINAL="$(pwd)/clouds_data/cloud_machine_types_cost_and_monthly_carbo
 CSV_DATA="/home/app/clouds_data/cloud_machine_types_cost_and_monthly_carbon_footprint.csv"
 URL="http://localhost:8183/milp"
 
-echo "📍 Looking for CSV in: $CSV_DATA"
+echo "📍 Looking for CSV in: $CSV_DATA_ORIGINAL"
 if [ ! -f "$CSV_DATA_ORIGINAL" ]; then
     echo "❌ ERROR: File does not exist!"
     exit 1
@@ -33,7 +33,7 @@ find "$INPUT_ROOT" -name "*.yaml" | while read -r file; do
     echo "📄 File:   $base_name"
     java -jar "$JAR_FILE" \
         "$file" \
-        "$CSV_DATA" \
+        "$CSV_DATA_ORIGINAL" \
         --timeout 600 \
         --url "$URL" \
         -o "$output_file"

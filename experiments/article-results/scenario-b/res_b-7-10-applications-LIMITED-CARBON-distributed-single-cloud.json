@@ -1,0 +1,157 @@
+{
+  "solverResults" : {
+    "gap" : "0.020",
+    "costZ" : 690.58,
+    "status" : "OPTIMAL"
+  },
+  "scenario" : "Test_01",
+  "infrastructure" : {
+    "globalCpuUtilizationPct" : 76.5909090909091,
+    "instances" : [ {
+      "memUtilizationPct" : 59.375,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "medical_records_micronaut",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "notifications_node",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      } ],
+      "carbonEmission" : 0.01331689,
+      "cpuUtilizationPct" : 97.5,
+      "cloudProvider" : "AWS",
+      "type" : "Machine_1: m5a.large"
+    }, {
+      "memUtilizationPct" : 50.0,
+      "allocations" : [ {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "medical_records_micronaut",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "notifications_node",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.026633781,
+      "cpuUtilizationPct" : 90.0,
+      "cloudProvider" : "AWS",
+      "type" : "Machine_2: m5a.xlarge"
+    }, {
+      "memUtilizationPct" : 41.40625,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "redis",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "auth_service",
+        "vcpuUsed" : 400.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "lab_tests_quarkus",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.053267562,
+      "cpuUtilizationPct" : 70.625,
+      "cloudProvider" : "AWS",
+      "type" : "Machine_3: m5a.2xlarge"
+    }, {
+      "memUtilizationPct" : 41.40625,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "redis",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "auth_service",
+        "vcpuUsed" : 400.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "lab_tests_quarkus",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.053267562,
+      "cpuUtilizationPct" : 70.625,
+      "cloudProvider" : "AWS",
+      "type" : "Machine_3: m5a.2xlarge"
+    } ],
+    "globalMemUtilizationPct" : 44.60227272727273
+  },
+  "performanceMetrics" : {
+    "wallTimeSeconds" : 0.051,
+    "detTime" : "0.007",
+    "branches" : 89
+  },
+  "inputMetrics" : {
+    "analyzedCloudProviders" : 3,
+    "targetCloudProviders" : 1,
+    "apps" : 10
+  },
+  "totalCarbon" : 0.0146485795,
+  "modelComplexity" : {
+    "intVars" : 129,
+    "totalVars" : 218,
+    "boolVars" : 89
+  }
+}

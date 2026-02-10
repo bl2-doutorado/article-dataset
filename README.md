@@ -32,33 +32,35 @@ This section details the environment required to execute and replicate the exper
 
 ## Directory Structure
 
-* clouds_data - Holds [cloud prices and carbon footprint data](clouds_data/cloud_machine_types_cost_and_monthly_carbon_footprint.csv)
-* experiments - Contains [yamls](experiments/yamls/) used to make the experiments
-* tosca - Contains TOSCA-related files.
-  * [profile](tosca/profile/README.md): Contains the cloud-native-applications profile documentation and definitions.
-  * templates: Contains the TOSCA templates used for the experiments presented in the paper.
-* hvitops - Contains the HVitOps (Healthcare Microservices Application) used as a case study.
+* clouds_data/ - Stores [cloud prices and carbon footprint data](clouds_data/cloud_machine_types_cost_and_monthly_carbon_footprint.csv)
+* experiments/ - Contains [the YAML files](experiments/yamls/) used to conduct  the experiments
+  * [article-results/](article-results): Contains the results presented in the paper, categorized by scenario (A, B, C).
+  * [yamls/](yamls): Holds all TOSCA templates used as input for the MILP solver.
+  * [results/](results): Directory where all results generated during test execution will be stored.
+* tosca/ - Contains TOSCA-related files and specifications.
+  * [profile/](tosca/profile/README.md): Includes the documentation and definitions for the cloud-native-applications profile.   
+* [hvitops/](hvitops/README.md) - Contains the source code and configurations for HVitOps (Healthcare Microservices Application) used as the case study.
 
-# Dependencies
+## Dependencies
 
 <!-- Informações relacionadas a benchmarks utilizados e dependências para a execução devem ser descritas nesta seção. 
 Busque deixar o mais claro possível, apresentando informações como versões de dependências e processos para acessar recursos de terceiros caso necessário. -->
 
-## Hardware Requirements
+### Hardware Requirements
 
 * Operating System: Debian-based Linux (e.g., Ubuntu 24.04+, Linux Mint 22.3+)
 * CPU: Minimum 4 cores (Recommended: 8+ cores)
 * RAM: Minimum 8GB (Recommended: 16GB+)
 * Storage: Minimum 10GB free space (Recommended: 20GB+ depending on data volume)
 
-## Software Requirements
+### Software Requirements
 
 * Git
 * Docker
 * Java 21+
 * Python 3.8+
 
-### Installation Scripts
+## Installation Scripts
 
 #### Git (https://git-scm.com/downloads)
 ```shell
@@ -94,6 +96,8 @@ npm -v # Should print "10.9.2".
 
 <!-- Caso a execução do artefato ofereça algum tipo de risco para os avaliadores. Este risco deve ser descrito e o processo adequado para garantir a segurança dos revisores deve ser apresentado. -->
 
+There are no significant security concerns. The program's operations are restricted to the 'experiments/results' directory, where it writes the output files generated during execution.
+
 # Installation
 
 <!-- O processo de baixar e instalar a aplicação deve ser descrito nesta seção. Ao final deste processo já é esperado que a aplicação/benchmark/ferramenta consiga ser executada. -->
@@ -119,7 +123,7 @@ Clone this repository:
 cd $HOME/git
 ```
 
-E clonar este repositório na máquina que irá executar os serviços:
+Clone this repository onto the machine where the services will be running:
 
 ```
 git clone https://github.com/xxx/xxx-sbrc26.git
@@ -134,17 +138,29 @@ cd xxx-sbrc26 # Replace with actual folder name
 <!-- Esta seção deve apresentar um passo a passo para a execução de um teste mínimo.
 Um teste mínimo de execução permite que os revisores consigam observar algumas funcionalidades do artefato. 
 Este teste é útil para a identificação de problemas durante o processo de instalação. -->
+This section provides a step-by-step guide to executing a minimal test case, allowing reviewers to verify the core functionalities of the artifact and identify potential installation issues.
 
-Once dependencies are configured, execute the demonstration script to test the application:
+## 1. Start the MILP Solver:
+Once dependencies are configured, execute the following script in a terminal to start the MILP service on port 8183. Ensure no other processes are using this port.
+
+```
+./execute_milp.sh
+```
+
+## 2. Run the Demonstration:
+Open a new terminal and execute the demonstration script to run all experiments discussed in the paper:
 
 
-## Usage
+### Usage
 
 The `run.sh` script provides a complete workflow, testing the three scenarios presetend on the article.
 
 ```
 ./run.sh
 ```
+
+## 3. Termination:
+After the script finishes, return to the first terminal (where the solver is running) and press **CTRL + C** to terminate the process.
 
 # Experiments
 

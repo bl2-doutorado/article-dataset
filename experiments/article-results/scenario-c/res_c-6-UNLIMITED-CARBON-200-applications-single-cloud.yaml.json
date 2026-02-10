@@ -1,0 +1,1692 @@
+{
+  "solverResults" : {
+    "gap" : "0.000",
+    "costZ" : 4184.26,
+    "status" : "OPTIMAL"
+  },
+  "scenario" : "Test_20",
+  "infrastructure" : {
+    "globalCpuUtilizationPct" : 99.58881578947368,
+    "instances" : [ {
+      "memUtilizationPct" : 61.328125,
+      "allocations" : [ {
+        "app" : "app-36",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-43",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-46",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-47",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-82",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-86",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-95",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-99",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-110",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-116",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-118",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-119",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-125",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-130",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-136",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-138",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-141",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-148",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-150",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-154",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-156",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-160",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-162",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-170",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-172",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-174",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-176",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-182",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-186",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-196",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-198",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-199",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.188434807,
+      "cpuUtilizationPct" : 98.75,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_18: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 52.734375,
+      "allocations" : [ {
+        "app" : "app-08",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-10",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-21",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-35",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-43",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-47",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-50",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-51",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-54",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-56",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-65",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-66",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-76",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-79",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-81",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-82",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-88",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-89",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-99",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-101",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-112",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-118",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-119",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-121",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-124",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-129",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-131",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-133",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-136",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-139",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-140",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-141",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-146",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-149",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-151",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-153",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-156",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-158",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-159",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-160",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-164",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-166",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-167",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-174",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-175",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-186",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-190",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-196",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-198",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      } ],
+      "carbonEmission" : 0.376869615,
+      "cpuUtilizationPct" : 100.0,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_19: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 53.3203125,
+      "allocations" : [ {
+        "app" : "app-01",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-04",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-06",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-07",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-09",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-11",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-12",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-14",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-15",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-17",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-18",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-19",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-20",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-24",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-25",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-26",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-29",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-32",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-33",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-34",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-37",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-38",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-39",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-40",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-41",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-42",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-45",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-49",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-52",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-53",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-59",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-61",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-62",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-63",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-64",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-68",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-70",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-72",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-73",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-74",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-80",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-83",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-92",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-93",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-94",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-100",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-103",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-108",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-111",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-114",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-122",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-126",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-127",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-132",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-135",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-142",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-145",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-147",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-155",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-157",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-163",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-168",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-169",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-171",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-173",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-179",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-180",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-185",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-187",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-189",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-191",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-193",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-194",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-195",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-200",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.75373923,
+      "cpuUtilizationPct" : 100.0,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_20: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 53.3203125,
+      "allocations" : [ {
+        "app" : "app-01",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-04",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-06",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-07",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-09",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-11",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-12",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-14",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-15",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-17",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-18",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-19",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-20",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-24",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-25",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-26",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-29",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-32",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-33",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-34",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-37",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-38",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-39",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-40",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-41",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-42",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-45",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-49",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-52",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-53",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-59",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-61",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-62",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-63",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-64",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-68",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-70",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-72",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-73",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-74",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-80",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-83",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-92",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-93",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-94",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-100",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-103",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-108",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-111",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-114",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-122",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-126",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-127",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-132",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-135",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-142",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-145",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-147",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-155",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-157",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-163",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-168",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-169",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-171",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-173",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-179",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-180",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-185",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-187",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-189",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-191",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-193",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-194",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-195",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-200",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.75373923,
+      "cpuUtilizationPct" : 100.0,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_20: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 56.201171875,
+      "allocations" : [ {
+        "app" : "app-01",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-02",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-03",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-05",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-06",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-07",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-08",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-09",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-10",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-11",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-12",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-13",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-15",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-16",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-17",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-19",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-22",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-23",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-24",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-25",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-26",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-27",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-28",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-29",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-30",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-31",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-32",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-34",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-35",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-36",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-38",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-40",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-41",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-42",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-43",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-44",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-45",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-46",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-47",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-48",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-49",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-50",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-51",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-52",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-53",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-54",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-55",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-56",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-57",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-58",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-59",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-60",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-61",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-62",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-63",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-64",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-65",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-66",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-67",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-68",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-69",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-70",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-71",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-72",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-74",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-75",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-76",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-77",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-78",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-79",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-80",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-81",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-82",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-83",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-84",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-85",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-86",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-87",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-88",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-89",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-90",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-91",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-92",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-94",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-95",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-96",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-97",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-98",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-99",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-100",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-101",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-102",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-103",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-104",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-105",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-106",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-107",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-109",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-111",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-112",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-113",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-114",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-115",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-117",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-118",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-119",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-120",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-122",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-123",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-125",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-127",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-128",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-130",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-132",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-133",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-134",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-135",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-136",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-137",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-138",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-139",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-140",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-141",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-142",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-143",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-144",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-145",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-147",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-148",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-149",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-150",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-152",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-153",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-155",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-156",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-157",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-158",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-159",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-160",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-161",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-163",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-164",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-165",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-166",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-167",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-168",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-170",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-171",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-172",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-173",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-174",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-175",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-176",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-177",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-178",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-179",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-180",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-181",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-182",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "app-183",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-184",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-185",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-186",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-187",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-188",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-189",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-190",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-191",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-192",
+        "vcpuUsed" : 450.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-193",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "app-194",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-195",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-196",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "app-197",
+        "vcpuUsed" : 600.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "app-198",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "app-200",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 1.50747846,
+      "cpuUtilizationPct" : 99.1796875,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_21: Compute-Standard-E3"
+    } ],
+    "globalMemUtilizationPct" : 54.89309210526315
+  },
+  "performanceMetrics" : {
+    "wallTimeSeconds" : 55.776,
+    "detTime" : "472.685",
+    "branches" : 4928
+  },
+  "inputMetrics" : {
+    "analyzedCloudProviders" : 3,
+    "targetCloudProviders" : 1,
+    "apps" : 200
+  },
+  "totalCarbon" : 0.3580261342,
+  "modelComplexity" : {
+    "intVars" : 6865,
+    "totalVars" : 10999,
+    "boolVars" : 4134
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "solverResults" : {
+    "gap" : "0.003",
+    "costZ" : 302.81,
+    "status" : "OPTIMAL"
+  },
+  "scenario" : "Test_01",
+  "infrastructure" : {
+    "globalCpuUtilizationPct" : 76.5909090909091,
+    "instances" : [ {
+      "memUtilizationPct" : 28.125,
+      "allocations" : [ {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      } ],
+      "carbonEmission" : 0.02355435,
+      "cpuUtilizationPct" : 57.49999999999999,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_15: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 56.25,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.047108701,
+      "cpuUtilizationPct" : 87.5,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_16: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 43.75,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "redis",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "auth_service",
+        "vcpuUsed" : 400.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "lab_tests_quarkus",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "medical_records_micronaut",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "notifications_node",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.094217403,
+      "cpuUtilizationPct" : 76.25,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_17: Compute-Standard-E3"
+    }, {
+      "memUtilizationPct" : 43.75,
+      "allocations" : [ {
+        "app" : "postgresql",
+        "vcpuUsed" : 1500.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "mongodb",
+        "vcpuUsed" : 1200.0,
+        "memUsed" : 4096.0
+      }, {
+        "app" : "redis",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "frontend",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "auth_service",
+        "vcpuUsed" : 400.0,
+        "memUsed" : 1024.0
+      }, {
+        "app" : "appointments_svc",
+        "vcpuUsed" : 1000.0,
+        "memUsed" : 2048.0
+      }, {
+        "app" : "lab_tests_quarkus",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "medical_records_micronaut",
+        "vcpuUsed" : 300.0,
+        "memUsed" : 512.0
+      }, {
+        "app" : "notifications_node",
+        "vcpuUsed" : 150.0,
+        "memUsed" : 256.0
+      }, {
+        "app" : "api_gateway",
+        "vcpuUsed" : 800.0,
+        "memUsed" : 1024.0
+      } ],
+      "carbonEmission" : 0.094217403,
+      "cpuUtilizationPct" : 76.25,
+      "cloudProvider" : "OCI",
+      "type" : "Machine_17: Compute-Standard-E3"
+    } ],
+    "globalMemUtilizationPct" : 44.60227272727273
+  },
+  "performanceMetrics" : {
+    "wallTimeSeconds" : 0.147,
+    "detTime" : "0.013",
+    "branches" : 174
+  },
+  "inputMetrics" : {
+    "analyzedCloudProviders" : 3,
+    "targetCloudProviders" : 1,
+    "apps" : 10
+  },
+  "totalCarbon" : 0.0259097857,
+  "modelComplexity" : {
+    "intVars" : 215,
+    "totalVars" : 372,
+    "boolVars" : 157
+  }
+}
