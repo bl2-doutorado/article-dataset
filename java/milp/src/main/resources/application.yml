@@ -1,0 +1,13 @@
+micronaut:
+  application:
+    name: milp
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      openapi-explorer:
+        paths: classpath:META-INF/swagger/views/openapi-explorer
+        mapping: /openapi-explorer/**
+  server:
+    port: 8183

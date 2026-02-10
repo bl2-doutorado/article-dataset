@@ -1,0 +1,115 @@
+plugins {
+    id("io.micronaut.application") version "4.6.1"
+    id("com.gradleup.shadow") version "8.3.9"
+    id("com.google.cloud.tools.jib") version "2.8.0"
+    id("io.micronaut.aot") version "4.6.1"
+    
+}
+
+version = "0.1"
+group = "com.tosca.milp"
+
+repositories {
+    mavenCentral()
+}
+
+
+
+dependencies {
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+    annotationProcessor("io.micronaut.openapi:micronaut-openapi")
+    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
+    annotationProcessor("io.micronaut.sourcegen:micronaut-sourcegen-generator-java")
+    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
+    implementation("io.micronaut:micronaut-aop")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut:micronaut-jackson-databind")
+    implementation("io.micronaut.serde:micronaut-serde-jackson")
+    implementation("io.micronaut.sourcegen:micronaut-sourcegen-annotations")
+    implementation("io.micronaut.validation:micronaut-validation")
+    implementation("jakarta.validation:jakarta.validation-api")
+    implementation("org.slf4j:jul-to-slf4j")
+    
+    //Ortools
+    implementation("com.google.ortools:ortools-java:9.14.6206"){
+        exclude group: 'com.google.ortools', module: 'ortools-linux-aarch64'
+        exclude group: 'com.google.ortools', module: 'ortools-darwin-aarch64'
+        exclude group: 'com.google.ortools', module: 'ortools-win32-x86-64' // se houver
+    }
+    
+    runtimeOnly("com.google.ortools:ortools-linux-x86-64:9.14.6206")
+    implementation 'net.java.dev.jna:jna-platform:5.14.0'
+    // implementation name: 'ortools-linux-x86-64-9.14.6206'
+    // https://mvnrepository.com/artifact/com.opencsv/opencsv
+    implementation 'com.opencsv:opencsv:5.11.2'
+
+
+
+    compileOnly("io.micronaut.openapi:micronaut-openapi-annotations")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("org.yaml:snakeyaml")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+
+application {
+    mainClass = "com.tosca.milp.Application"
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("21")
+    targetCompatibility = JavaVersion.toVersion("21")
+}
+
+
+tasks {
+    jib {
+        to {
+            image = "gcr.io/myapp/jib-image"
+        }
+        container {
+            ports = ['8183']
+            // Força o Micronaut a ler esta porta no ambiente Docker
+            jvmFlags = ['-Dmicronaut.server.port=8183', '-Dmicronaut.server.host=0.0.0.0']
+        }
+    }
+}
+
+
+graalvmNative.toolchainDetection = false
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("com.tosca.milp.*")
+    }
+    
+    aot {
+        // Please review carefully the optimizations enabled below
+        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
+        optimizeServiceLoading = false
+        convertYamlToJava = false
+        precomputeOperations = true
+        cacheEnvironment = true
+        optimizeClassLoading = true
+        deduceEnvironment = true
+        optimizeNetty = true
+        replaceLogbackXml = true
+    }
+}
+
+
+tasks.named("dockerfileNative") {
+    jdkVersion = "21"
+}
+
+tasks.named("optimizedDockerfile") {
+    exposePort(8183)
+}
+
+docker {
+    url = System.getProperty("os.name").toLowerCase().contains("windows") 
+          ? 'tcp://127.0.0.1:2375' 
+          : 'unix:///var/run/docker.sock'
+}

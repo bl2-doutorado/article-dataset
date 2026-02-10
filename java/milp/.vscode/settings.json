@@ -1,0 +1,5 @@
+{
+  // "java.import.gradle.java.home": "${userHome}/.asdf/installs/java/temurin-21.0.4+7.0.LTS/",
+  "java.import.gradle.version": "8.7",
+  "java.configuration.updateBuildConfiguration": "automatic",
+}
