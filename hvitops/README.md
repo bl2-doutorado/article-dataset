@@ -5,29 +5,29 @@ A complete healthcare platform based on microservices, built with modern technol
 ## System Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                      Frontend (React + Vite)                    │
-│                      Port: 3000                                 │
-└──────────────────────────────┬──────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                      Frontend (React + Vite)                                    │
+│                      Port: 3000                                                 │
+└──────────────────────────────┬──────────────────────────────────────────────────┘
                                │
-┌──────────────────────────────▼──────────────────────────────────┐
-│                    API Gateway (Spring Boot)                    │
-│                      Port: 8080                                 │
-│              JWT Authentication & Routing                       │
-└──┬──────────────────────┬──────────────────────┬────────────────┘
-   │                      │                      │
-   ▼                      ▼                      ▼
-┌─────────────────┐ ┌──────────────────┐ ┌──────────────────┐
-│  Appointments   │ │ Laboratory Tests │ │ Medical Records  │
-│  (Spring Boot)  │ │    (Quarkus)     │ │   (Micronaut)    │
-│   Port: 8081    │ │   Port: 8082     │ │   Port: 8083     │
-└────────┬────────┘ └────────┬─────────┘ └────────┬─────────┘
-         │                   │                    │
-         ▼                   ▼                    ▼
-    ┌─────────┐          ┌──────────┐       ┌──────────┐
-    │PostgreSQL          │ MongoDB  │       │ MongoDB  │
-    │Port: 5432          │Port: 27017       │Port: 27017
-    └─────────┘          └──────────┘       └──────────┘
+┌──────────────────────────────▼──────────────────────────────────────────────────┐
+│                    API Gateway (Spring Boot)                                    │
+│                      Port: 8080                                                 │
+│              JWT Authentication & Routing                                       │
+└──┬──────────────────────────┬─────────────────┬──────────────────────┬──────────┘
+   │                          │                 │                      │           
+   ▼                          ▼                 ▼                      ▼           
+┌─────────────────┐ ┌──────────────────┐  ┌──────────────────┐ ┌──────────────────┐  
+│  Appointments   │ │       Auth       │  │ Laboratory Tests │ │ Medical Records  │  
+│  (Spring Boot)  │ │  (Spring Boot)   │  │    (Quarkus)     │ │   (Micronaut)    │  
+│   Port: 8081    │ |   Port: 8085     |  │   Port: 8082     │ │   Port: 8083     │  
+└────────┬────────┘ └─────┬────────────┘  └────────┬─────────┘ └────────┬─────────┘  
+         │                │                        │                    │
+         ▼                ▼                        ▼                    ▼ 
+    ┌─────────────────────────┐              ┌────────────┐       ┌───────────┐
+    │     PostgreSQL          │              │ MongoDB    │       │ MongoDB   │
+    │     Port: 5432          │              │Port: 27017 │       │Port: 27017│
+    └─────────────────────────┘              └────────────┘       └───────────┘
 
 ┌──────────────────────────────────────────────────────────────────┐
 │              Notifications Service (Node.js + Express)           │
@@ -104,6 +104,14 @@ A complete healthcare platform based on microservices, built with modern technol
   - Notification queue
   - Email sending simulation
   - Asynchronous notification processing
+
+### 7. **hvitops-auth** (Authentication Service)
+
+- **Stack**: Java 21 + Spring Boot 3 + Gradle
+- **Database**: PostgreSQL
+- **Port**: 8085
+- **Features**:
+  - User authentication
 
 ## Databases
 
@@ -281,6 +289,7 @@ hvitops-platform/
 ├── hvitops-laboratory-tests/       # Lab Tests Service
 ├── hvitops-records/                # Medical Records Service
 ├── hvitops-notifications/          # Notifications Service
+├── hvitops-auth/                   # Authentication Service
 ├── docker-config/
 │   ├── postgres/
 │   │   └── init.sql               # PostgreSQL initialization script
