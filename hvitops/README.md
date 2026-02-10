@@ -182,6 +182,7 @@ docker-compose ps
 | Laboratory Tests | http://localhost:8082 |
 | Medical Records | http://localhost:8083 |
 | Notifications | http://localhost:8084 |
+| Authentication | http://localhost:8085 |
 | PostgreSQL | localhost:5432 |
 | MongoDB | localhost:27017 |
 | Redis | localhost:6379 |
