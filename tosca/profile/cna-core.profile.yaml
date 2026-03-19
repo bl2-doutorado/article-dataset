@@ -475,6 +475,11 @@ node_types:
       Standard:
         create:
           description: "Phase where the node joins the cluster."
+          inputs:
+            # O orquestrador espera o cluster gerar o token para preencher isso
+            bootstrap_token: { get_attribute: [SELF, cluster, bootstrap_token] }
+            cluster_ca_cert: { get_attribute: [SELF, cluster, cluster_ca_cert] }
+            api_server_endpoint: { get_attribute: [SELF, cluster, api_server_endpoint] }
     cloud_native.nodes.AbstractNetworkService:
       description: >
         An abstract node that defines how a component is exposed to the network.
@@ -655,7 +660,6 @@ relationship_types:
       Configure:
         pre_configure_source:
           description: TOSCA Orchestrator executes a script to get the join token of the cluster (target) and prepares the node (source) before it connects.
-          implementation: scripts/setup_join_credentials.sh
 
   cloud_native.relationships.DefinedOn:
     description: Describes a logical association where a resource definition is managed by a specific cluster control plane.
