@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.tosca.milp.carbon.CarbonUnit;
 import com.tosca.milp.domain.InfrastructureData;
 import com.tosca.milp.domain.MachineDetails;
 import com.tosca.milp.machineCostReader.MachineCostReader;
@@ -65,7 +66,7 @@ public class MilpController {
         infrastructureData.fixedCost(),
         machineModelsCarbonFootPrint,
         // infrastructureData.getCarbonFootprintPerMachineType(),
-        ((Double) (infrastructureData.maxTotalCarbonFootprint() * 10000000000l)).longValue(),
+        scaleCarbonLimit(infrastructureData.maxTotalCarbonFootprint()),
         infrastructureData.isMirroringEnabled(),
         infrastructureData.maxTimeInSeconds(),
         infrastructureData.targetCloudCount(),
@@ -80,13 +81,23 @@ public class MilpController {
         machineDetailsList.stream()
             .map(
                 (MachineDetails machineDetails) -> {
-                  Double d =
-                      (Double) (Double) machineDetails.getCarbonFootprint()
-                          * Double.valueOf(10000000000l);
-                  return d.longValue();
+                  Double carbonFootprint =
+                      (Double) machineDetails.getCarbonFootprint();
+                  return CarbonUnit.toScaled(carbonFootprint);
                 })
             .collect(Collectors.toList())
             .toArray(new Long[0]));
+  }
+
+  /**
+   * Scales a tCO2e carbon limit into the solver domain. A null limit (or one so large that it
+   * saturates) is treated as unlimited by the estimator.
+   */
+  private static long scaleCarbonLimit(Double maxTotalCarbonFootprint) {
+    if (maxTotalCarbonFootprint == null) {
+      return CarbonUnit.UNLIMITED_SCALED;
+    }
+    return CarbonUnit.toScaled(maxTotalCarbonFootprint);
   }
 
   

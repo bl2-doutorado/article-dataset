@@ -50,7 +50,7 @@ Each result file contains detailed metrics regarding the optimization process, t
 
   * cpuUtilizationPct / memUtilizationPct: Resource utilization specific to that instance.
 
-  * carbonEmission: Estimated carbon footprint (CO2​e) for that specific unit.
+  * carbonEmission: Estimated monthly carbon footprint of that specific machine instance, expressed in **tonnes of CO2e (tCO2e)** — it matches the machine's footprint in the CSV data sheet.
 
   * allocations: A list of microservices (apps) mapped to this instance, including their specific resource consumption (vcpuUsed and memUsed).
 
@@ -76,4 +76,4 @@ Each result file contains detailed metrics regarding the optimization process, t
 
 ### 6. totalCarbon
 
-* Total estimated monthly carbon footprint for the entire application topology, used as a primary constraint or metric for Green Cloud policies.
+* Total estimated monthly carbon footprint for the entire application topology, expressed in **tonnes of CO2e (tCO2e)** and equal to the sum of the per-instance `carbonEmission`. It is used as the primary constraint (when a LIMITED-CARBON value is provided) or metric for Green Cloud policies.

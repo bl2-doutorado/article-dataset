@@ -732,8 +732,8 @@ policy_types:
     properties:
       max_total_carbon_footprint:
         type: float
-        required: true
-        description: "gCO2eq/kWh monthly limit (Carbon intensity of local electricity network) to all the topology."
+        required: false
+        description: "Maximum total monthly carbon footprint of the whole topology, in tCO2e. Omit the property or use the CLI default to disable the carbon constraint."
       # energy_source_preference:
       #   type: list
       #   entry_schema: { type: string }

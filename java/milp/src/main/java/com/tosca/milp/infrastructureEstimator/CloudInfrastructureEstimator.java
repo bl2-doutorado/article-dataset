@@ -12,6 +12,7 @@ import com.google.ortools.sat.LinearExpr;
 import com.google.ortools.sat.LinearExprBuilder;
 import com.google.ortools.sat.Literal;
 import com.google.ortools.sat.SatParameters;
+import com.tosca.milp.carbon.CarbonUnit;
 import io.micronaut.context.annotation.Bean;
 import jakarta.inject.Singleton;
 import java.io.File;
@@ -380,12 +381,18 @@ public class CloudInfrastructureEstimator extends CpSolverSolutionCallback {
 
     LinearExprBuilder totalCarbonExpr = LinearExpr.newBuilder();
 
+    boolean carbonLimited = this.maxTotalCarbonFootprint != CarbonUnit.UNLIMITED_SCALED;
     for (int t = 0; t < machineTypesQuantity; t++) {
 
       totalCarbonExpr.addTerm(y[t], carbonFootprintPerMachineType[t]);
     }
 
-    model.addLessOrEqual(totalCarbonExpr.build(), this.maxTotalCarbonFootprint);
+    if (carbonLimited) {
+      model.addLessOrEqual(totalCarbonExpr.build(), this.maxTotalCarbonFootprint);
+      log.info("Carbon limit enabled (max {} tCO2e).", CarbonUnit.toTonnes(this.maxTotalCarbonFootprint));
+    } else {
+      log.info("Carbon limit: unlimited (constraint skipped).");
+    }
 
     // ---------------------------------------------------
     // 4. RESOLUTION AND RESULTS PRESENTATION
@@ -432,7 +439,7 @@ public class CloudInfrastructureEstimator extends CpSolverSolutionCallback {
     log.info("Adding Objective Function added to Model with success.");
     log.info("Demands: {}", Arrays.toString(instancesPerApplication));
     log.info("Target Clouds: {}", targetCloudCount);
-    log.info("Carbon Limit: {}", maxTotalCarbonFootprint);
+    log.info("Carbon Limit: {}", carbonLimited ? CarbonUnit.toTonnes(this.maxTotalCarbonFootprint) + " tCO2e" : "unlimited");
 
     for (int j = 0; j < applicationsQuantity; j++) {
       boolean foundProvider = false;
@@ -940,9 +947,9 @@ public class CloudInfrastructureEstimator extends CpSolverSolutionCallback {
           if (machineQuantity > 0 && distribuitionMachineTypesPerCloudProvider[t] == k) {
 
             carbonTotalSolucao += machineQuantity * carbonFootprintPerMachineType[t];
-            double formattedCarbon = (double) this.carbonFootprintPerMachineType[t] / 1000000000.0;
+            double formattedCarbon = CarbonUnit.toTonnes(this.carbonFootprintPerMachineType[t]);
             log.info(
-                "  Machine Type {}: {} instances | Carbon: {} gCO2e",
+                "  Machine Type {}: {} instances | Carbon: {} tCO2e",
                 t + 1,
                 machineQuantity,
                 formattedCarbon);
@@ -976,13 +983,15 @@ public class CloudInfrastructureEstimator extends CpSolverSolutionCallback {
         log.info("  CLOUD PROVIDER {} INACTIVATED", (k + 1));
       }
     }
-    log.info("-> Total Carbon Footprint: {} gCO2e", carbonTotalSolucao / 10000000000l);
+    log.info(
+        "-> Total Carbon Footprint: {} tCO2e",
+        carbonTotalSolucao / CarbonUnit.SCALE_AS_DOUBLE);
     return writeFinalResponse(
         statusLabel,
         totalCost,
         bestBoundValueProvider.get(),
         gap,
-        carbonTotalSolucao / 10000000000l,
+        carbonTotalSolucao / CarbonUnit.SCALE_AS_DOUBLE,
         hours,
         minutes,
         seconds,
@@ -1008,9 +1017,9 @@ public class CloudInfrastructureEstimator extends CpSolverSolutionCallback {
               machineInstance.put(
                   "cloudProvider", /*"Cloud_" + (k + 1) + ": " + */ this.cloudProviderNames.get(k));
               machineInstance.put("type", "Machine_" + (t + 1) + ": " + machineModelNames.get(t));
-              // Adicionando emissão de carbono individual do modelo
+              // Emissão de carbono individual do modelo em tCO2e (solucao escalada / 10^10)
               machineInstance.put(
-                  "carbonEmission", carbonFootprintPerMachineType[t] / 1000000000.0);
+                  "carbonEmission", CarbonUnit.toTonnes(carbonFootprintPerMachineType[t]));
 
               double machineCpuUsed = 0;
               double machineMemUsed = 0;

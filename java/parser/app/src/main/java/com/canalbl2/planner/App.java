@@ -47,7 +47,9 @@ public class App implements Callable<Integer> {
 
   @Option(
       names = {"-c", "--carbon"},
-      description = "Carbon Footprint Limit (default: ${DEFAULT-VALUE})")
+      description =
+          "Carbon Footprint Limit in tCO2e. The default (${DEFAULT-VALUE}) means unlimited; any"
+              + " value that saturates is treated as no limit.")
   private Float maxCarbon = Float.MAX_VALUE;
 
   @Option(
@@ -125,7 +127,7 @@ public class App implements Callable<Integer> {
     Float finalMaxCarbon = this.defineFinalMaxCarbon(templateMaxCarbon);
 
     System.out.printf("Found final max carbon {%f}\n", finalMaxCarbon);
-    printSummary(this.yamlFilePath, this.csvFilePath);
+    printSummary(this.yamlFilePath, this.csvFilePath, finalMaxCarbon);
     Map<String, Object> config =
         generateConfiguration(
             maxTimeInSeconds,
@@ -323,14 +325,14 @@ public class App implements Callable<Integer> {
    * @param yamlFile
    * @param csvFile
    */
-  private void printSummary(String yamlFile, String csvFile) {
+  private void printSummary(String yamlFile, String csvFile, Float finalMaxCarbon) {
     System.out.println("\n" + "=".repeat(60));
     System.out.println("📊 EXPERIMENT CONFIGURATION SUMMARY");
     System.out.println("-".repeat(60));
     System.out.printf("%-25s | %-15s | %-15s%n", "PARAMETER", "VALUE", "SOURCE");
     System.out.println("-".repeat(60));
 
-    printSummaryRow("Max Carbon", this.maxCarbon, "--carbon", 180.017f);
+    printSummaryRow("Max Carbon", finalMaxCarbon, "--carbon", Float.MAX_VALUE);
     printSummaryRow("Target Clouds", this.targetCloudCount, "--clouds", 1);
     printSummaryRow("Mirroring", this.mirroringEnabled, "--mirroring", false);
     printSummaryRow("Timeout (s)", this.maxTimeInSeconds, "--timeout", 20);
