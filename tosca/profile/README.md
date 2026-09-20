@@ -36,7 +36,7 @@ The foundation of the framework. It defines the metadata required for optimizati
 
 ### Policies
 
-* Sustainability: Defines carbon footprint thresholds (max_total_carbon_footprint).
+* Sustainability: Defines carbon footprint thresholds (`max_total_carbon_footprint`, expressed in **tCO2e**; omit it to disable the constraint).
 
 * SchedulingStrategy: Guides the orchestrator on physical mapping (e.g., consolidation vs. isolation).
 

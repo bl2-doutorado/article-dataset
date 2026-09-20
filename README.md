@@ -70,6 +70,14 @@ sudo sh get-docker.sh
 
 There are no significant security concerns. The program's operations are restricted to the 'experiments/results' directory, where it writes the output files generated during execution.
 
+## Carbon Units Contract
+
+Carbon values are consistently expressed in **tonnes of CO2e (tCO2e)**:
+
+* `cloud_machine_types_cost_and_monthly_carbon_footprint.csv` stores the monthly per-machine footprint in tCO2e.
+* The TOSCA policy property `max_total_carbon_footprint` is a tCO2e total limit; omit it (or leave it as `{}`) to disable the carbon constraint.
+* The solver output fields `carbonEmission` (per instance) and `totalCarbon` (sum across instances) are both in tCO2e.
+
 # Installation
 
 To configure the environment, ensure all [Dependencies](#dependencies) are installed and operational, particularly the Docker engine.
